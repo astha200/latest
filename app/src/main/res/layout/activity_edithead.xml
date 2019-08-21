@@ -55,7 +55,7 @@
                         android:textSize="18sp" />
 
                     <Spinner
-                        android:id="@+id/slumname1"
+                        android:id="@+id/slumnameed"
                         android:background="@drawable/bginputtask"
 
                         android:textColorHint="#B5B5B5"
@@ -84,7 +84,7 @@
                         android:textSize="18sp" />
 
                     <EditText
-                        android:id="@+id/hof1"
+                        android:id="@+id/hofed"
                         android:inputType="text"
                         android:background="@drawable/bginputtask"
                         android:paddingLeft="12dp"
@@ -116,7 +116,7 @@
                         android:textSize="18sp" />
 
                     <ImageView
-                        android:id="@+id/imageBox"
+                        android:id="@+id/imageBoxed"
                         android:layout_margin="30dp"
                         android:layout_width="match_parent"
                         android:layout_height="250dp"
@@ -124,7 +124,7 @@
                         android:layout_marginTop="5dp" />
 
                     <ImageView
-                        android:id="@+id/cameraBtn"
+                        android:id="@+id/cameraBtned"
                         android:layout_width="match_parent"
                         android:layout_height="53dp"
                         app:srcCompat="@android:drawable/ic_menu_camera" />
@@ -153,7 +153,7 @@
                         android:textSize="18sp" />
 
                     <Spinner
-                        android:id="@+id/spinner21"
+                        android:id="@+id/spinner2ed"
                         android:layout_width="match_parent"
                         android:layout_height="55dp"
                         android:background="@drawable/bginputtask"
@@ -178,7 +178,7 @@
                         android:textSize="18sp" />
 
                     <Spinner
-                        android:id="@+id/catspinner1"
+                        android:id="@+id/catspinnered"
                         android:layout_width="match_parent"
                         android:layout_height="55dp"
                         android:background="@drawable/bginputtask"
@@ -203,7 +203,7 @@
                         android:layout_height="wrap_content" />
 
                     <Spinner
-                        android:id="@+id/religion11"
+                        android:id="@+id/religion1ed"
                         android:layout_width="match_parent"
                         android:layout_height="55dp"
                         android:background="@drawable/bginputtask"
@@ -228,7 +228,7 @@
                         android:textSize="18sp" />
 
                     <EditText
-                        android:id="@+id/Fathersname1"
+                        android:id="@+id/Fathersnameed"
                         android:inputType="text"
                         android:background="@drawable/bginputtask"
                         android:paddingLeft="12dp"
@@ -258,7 +258,7 @@
                         android:textSize="18sp" />
 
                     <EditText
-                        android:id="@+id/hodage1"
+                        android:id="@+id/hodageed"
                         android:inputType="phone"
                         android:background="@drawable/bginputtask"
                         android:paddingLeft="12dp"
@@ -288,7 +288,7 @@
                         android:textSize="18sp" />
 
                     <EditText
-                        android:id="@+id/mobileno1"
+                        android:id="@+id/mobilenoed"
                         android:inputType="phone"
                         android:background="@drawable/bginputtask"
                         android:paddingLeft="12dp"
@@ -319,7 +319,7 @@
                         android:textSize="18sp" />
 
                     <EditText
-                        android:id="@+id/address1"
+                        android:id="@+id/addressed"
                         android:inputType="textMultiLine"
                         android:background="@drawable/bginputtask"
                         android:paddingLeft="12dp"
@@ -348,7 +348,7 @@
                         android:textSize="18sp" />
 
                     <EditText
-                        android:id="@+id/famiincome1"
+                        android:id="@+id/famiincomeed"
                         android:inputType="text"
                         android:background="@drawable/bginputtask"
                         android:paddingLeft="12dp"
@@ -379,7 +379,7 @@
                         android:textSize="18sp" />
 
                     <Spinner
-                        android:id="@+id/nationalotyspinner1"
+                        android:id="@+id/nationalotyspinnered"
                         android:layout_width="match_parent"
                         android:layout_height="55dp"
                         android:background="@drawable/bginputtask" />
@@ -416,7 +416,7 @@
                         android:layout_height="wrap_content" />
 
                     <EditText
-                        android:id="@+id/adarcard1"
+                        android:id="@+id/adarcard1ed"
                         android:inputType="text"
                         android:background="@drawable/bginputtask"
                         android:paddingLeft="12dp"
@@ -455,7 +455,7 @@
                         android:layout_height="wrap_content" />
 
                     <Spinner
-                        android:id="@+id/familymemberspinner1"
+                        android:id="@+id/familymemberspinner1ed"
                         android:layout_width="match_parent"
                         android:layout_height="55dp"
                         android:background="@drawable/bginputtask"
@@ -464,7 +464,7 @@
                 </LinearLayout>
 
                 <Button
-                    android:id="@+id/savebtn1"
+                    android:id="@+id/savebtn1ed"
                     android:layout_marginRight="16dp"
                     android:layout_marginLeft="16dp"
                     android:layout_marginTop="20dp"

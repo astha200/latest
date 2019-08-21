@@ -11,8 +11,8 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
+//import android.view.Menu;
+//import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -39,14 +39,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class Infoshow extends AppCompatActivity {
+public class editApplicationform extends AppCompatActivity {
     DatabaseReference db;
     FirebaseAuth firebaseAuth;
     ImageView image1, image2;
     TextView t0,t1,t2,t3,t4,t5,t6,t7,t8,t9,t10,t11,t12,t13,t14,t15,t16,t17,t18,t19;
     ArrayList<String> m1,m2,m3,m4,m5,m6,mid;
     ListView mylist1;
-    Infoshow.myhelperclass obj;
+    editApplicationform.myhelperclass obj;
     String d, pathToFile;
     FirebaseStorage storage = FirebaseStorage.getInstance();
     StorageReference gsReference;
@@ -55,7 +55,7 @@ public class Infoshow extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_infoshow);
+        setContentView(R.layout.activity_edit_applicationform);
         image1=findViewById(R.id.adminicon);
         image2=findViewById(R.id.admindicon);
         t0=findViewById(R.id.infoslumane);
@@ -98,14 +98,14 @@ public class Infoshow extends AppCompatActivity {
         if(b!=null)
         {
             d= (String) b.get("id");
-           // Toast.makeText(this, (String) b.get("id"), Toast.LENGTH_SHORT).show();
+            // Toast.makeText(this, (String) b.get("id"), Toast.LENGTH_SHORT).show();
         }
 
         fetchvalues();
 
 
-        obj=new Infoshow.myhelperclass(this,android.R.layout.simple_list_item_1,mid);
-         mylist1.setAdapter(obj);
+        obj=new editApplicationform.myhelperclass(this,android.R.layout.simple_list_item_1,mid);
+        mylist1.setAdapter(obj);
 
 
         db= FirebaseDatabase.getInstance().getReference().child("forms").child(d);
@@ -212,126 +212,128 @@ public class Infoshow extends AppCompatActivity {
 
 
     }
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-
-        getMenuInflater().inflate(R.menu.mymenu,menu);
-        return true;
-    }
-
-    //MENU STARTS FROM HERE
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        if(item.getItemId()==R.id.edithead)
-        {
-            Intent a1 = new Intent(Infoshow.this,edithead.class);
-            a1.putExtra("id", d);
-            startActivity(a1); //Error here
-            Infoshow.this.finish();
-
-        }
-        else if(item.getItemId()==R.id.deletehousemem)
-        {
-            Intent a = new Intent(Infoshow.this,deletemember.class);
-            a.putExtra("id", d);
-            startActivity(a);
 
 
-
-        }
-        else if(item.getItemId()==R.id.addhousemem)
-        {
-            Intent a = new Intent(Infoshow.this,addnewmember.class);
-            a.putExtra("id", d);
-            startActivity(a);
-            Infoshow.this.finish();
-
-        }
-        else if(item.getItemId()==R.id.edithouseinfo)
-        {
-
-
-        }
-        else if(item.getItemId()==R.id.deleteentry)
-
-        {
-
-            firebaseAuth= FirebaseAuth.getInstance();
-            db= FirebaseDatabase.getInstance().getReference().child("deleterequest");
-            db.child(d).child("agentname").setValue(firebaseAuth.getCurrentUser().getEmail().toString());
-            Toast.makeText(this, "Your Delete Request Has been Send", Toast.LENGTH_SHORT).show();
-            Intent a = new Intent(Infoshow.this,mysubmission.class);
-            startActivity(a);
-            Infoshow.this.finish();
-
-        }
-        return true;
-    }
-
-    public void onBackPressed() {
-        super.onBackPressed();
-
-        Intent a = new Intent(Infoshow.this,mysubmission.class);
-        startActivity(a);
-        Infoshow.this.finish();
-
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//
+//        getMenuInflater().inflate(R.menu.mymenu,menu);
+//        return true;
+//    }
+//
+//    //MENU STARTS FROM HERE
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//
+//        if(item.getItemId()==R.id.edithead)
+//        {
+//            Intent a = new Intent(editApplicationform.this,editApplicationform.class);
+//            a.putExtra("id", d);
+//            startActivity(a);
+//            editApplicationform.this.finish();
+//
+//        }
+//        else if(item.getItemId()==R.id.deletehousemem)
+//        {
+//            Intent a = new Intent(editApplicationform.this,deletemember.class);
+//            a.putExtra("id", d);
+//            startActivity(a);
+//
+//
+//
+//        }
+//        else if(item.getItemId()==R.id.addhousemem)
+//        {
+//            Intent a = new Intent(editApplicationform.this,addnewmember.class);
+//            a.putExtra("id", d);
+//            startActivity(a);
+//            editApplicationform.this.finish();
+//
+//        }
+//        else if(item.getItemId()==R.id.edithouseinfo)
+//        {
+//
+//
+//        }
+//        else if(item.getItemId()==R.id.deleteentry)
+//
+//        {
+//
+//            firebaseAuth= FirebaseAuth.getInstance();
+//            db= FirebaseDatabase.getInstance().getReference().child("deleterequest");
+//            db.child(d).child("agentname").setValue(firebaseAuth.getCurrentUser().getEmail().toString());
+//            Toast.makeText(this, "Your Delete Request Has been Send", Toast.LENGTH_SHORT).show();
+//            Intent a = new Intent(editApplicationform.this,mysubmission.class);
+//            startActivity(a);
+//            editApplicationform.this.finish();
+//
+//        }
+//        return true;
+//    }
+//
+//    public void onBackPressed() {
+//        super.onBackPressed();
+//
+//        Intent a = new Intent(editApplicationform.this,mysubmission.class);
+//        startActivity(a);
+//        editApplicationform.this.finish();
+//
+//    }
 
     void fetchvalues() {
 
 
 
-                    db =FirebaseDatabase.getInstance().getReference().child("forms").child(d).child("members");
-                    db.addChildEventListener(new ChildEventListener() {
+        db =FirebaseDatabase.getInstance().getReference().child("forms").child(d).child("members");
+        db.addChildEventListener(new ChildEventListener() {
 
-                        @Override
-                        public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
-                            //Toast.makeText(Infoshow.this, "hello", Toast.LENGTH_SHORT).show();
-                            String aa = dataSnapshot.getKey();
+                //Toast.makeText(Infoshow.this, "hello", Toast.LENGTH_SHORT).show();
+                String aa = dataSnapshot.getKey();
 
-                            String aahar1 = dataSnapshot.child("aahar").getValue(String.class);
-                            String namea = dataSnapshot.child("nameofmember").getValue(String.class);
-                            String age1 = dataSnapshot.child("age").getValue(String.class);
-                            String gender1 = dataSnapshot.child("gender").getValue(String.class);
-                            String relation1 = dataSnapshot.child("relation").getValue(String.class);
-                            //Toast.makeText(Infoshow.this, namea, Toast.LENGTH_SHORT).show();
+                String aahar1 = dataSnapshot.child("aahar").getValue(String.class);
+                String namea = dataSnapshot.child("nameofmember").getValue(String.class);
+                String age1 = dataSnapshot.child("age").getValue(String.class);
+                String gender1 = dataSnapshot.child("gender").getValue(String.class);
+                String relation1 = dataSnapshot.child("relation").getValue(String.class);
+                //Toast.makeText(Infoshow.this, namea, Toast.LENGTH_SHORT).show();
 
-                            mid.add(aa);
-                            m1.add(namea);
-                            m2.add(age1);
-                            m3.add(gender1);
-                            m4.add(relation1);
-                            m5.add(aahar1);
-                            obj.notifyDataSetChanged();
-
-
+                mid.add(aa);
+                m1.add(namea);
+                m2.add(age1);
+                m3.add(gender1);
+                m4.add(relation1);
+                m5.add(aahar1);
+                obj.notifyDataSetChanged();
 
 
-                        }
 
 
-                        @Override
-                        public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+            }
 
-                        }
 
-                        @Override
-                        public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
-                        }
+            }
 
-                        @Override
-                        public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
 
-                        }
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
 
-                        }
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
-                    });
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+
+        });
 
 
 
