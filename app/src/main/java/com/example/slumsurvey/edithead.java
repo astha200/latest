@@ -116,7 +116,7 @@ public class edithead extends AppCompatActivity {
         final StorageReference storageRef = storage.getReferenceFromUrl("gs://survey-7f227.appspot.com/");    //change the url according to your firebase app
         // cameraBtn1=findViewById(R.id.cameraBtn1);
         //  imageBox1=findViewById(R.id.imageBox1);
-        imageBox.setVisibility(View.GONE);
+        //imageBox.setVisibility(View.GONE);
         //imageBox1.setVisibility(View.GONE);
         save=findViewById(R.id.savebtn1ed);
         Intent iin= getIntent();
@@ -392,7 +392,8 @@ public class edithead extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                gsReference=storage.getReferenceFromUrl(dataSnapshot.child("headoffamily").child("imageUrl").getValue().toString());
+                imageUrl=dataSnapshot.child("headoffamily").child("imageUrl").getValue().toString();
+                gsReference=storage.getReferenceFromUrl(imageUrl);
 
                 try {
                     final File localFile = File.createTempFile("image", "jpg");
@@ -413,26 +414,26 @@ public class edithead extends AppCompatActivity {
 
                 }
 
-                gsReference=storage.getReferenceFromUrl(dataSnapshot.child("houseoffamily").child("imageUrl").getValue().toString());
-
-                try {
-                    final File localFile = File.createTempFile("image", "jpg");
-                    gsReference.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                            pathToFile=localFile.getAbsolutePath();
-                            Bitmap bitmap = BitmapFactory.decodeFile(pathToFile);
-                            imageBox.setImageBitmap(bitmap);
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-
-                        }
-                    });
-                } catch (IOException e) {
-
-                }
+//                gsReference=storage.getReferenceFromUrl(dataSnapshot.child("houseoffamily").child("imageUrl").getValue().toString());
+//
+//                try {
+//                    final File localFile = File.createTempFile("image", "jpg");
+//                    gsReference.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+//                        @Override
+//                        public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+//                            pathToFile=localFile.getAbsolutePath();
+//                            Bitmap bitmap = BitmapFactory.decodeFile(pathToFile);
+//                            imageBox.setImageBitmap(bitmap);
+//                        }
+//                    }).addOnFailureListener(new OnFailureListener() {
+//                        @Override
+//                        public void onFailure(@NonNull Exception e) {
+//
+//                        }
+//                    });
+//                } catch (IOException e) {
+//
+//                }
 
                 spinner.setSelection(categories.indexOf(dataSnapshot.child("headoffamily").child("nameofslum").getValue().toString()));
                 hof.setText(dataSnapshot.child("headoffamily").child("headoffamily").getValue().toString());

@@ -82,7 +82,7 @@
         private StorageReference mStorage;
         private ProgressDialog mprogress;
 
-        String  conhousestring, roomstring, toiletstring, kitchenstring, yearsofstayingstring, imageUrl;
+        String  conhousestring, roomstring, toiletstring, kitchenstring, yearsofstayingstring, imageUrl="not available";
 
         FirebaseStorage storage;
 
@@ -275,6 +275,9 @@
         else if(consent.getText().toString().trim().equals(""))
         {
         consent.setError("This field cannot be blank");
+        }
+        else if(imageUrl=="not available"){
+                Toast.makeText(houseform.this, "Wait for the image to upload/Upload image", Toast.LENGTH_SHORT).show();
         }
         else{
 //                    // uploadImage();

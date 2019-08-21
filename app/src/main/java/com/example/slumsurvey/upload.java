@@ -26,6 +26,8 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -36,8 +38,9 @@ import java.nio.file.FileVisitOption;
 public class upload extends AppCompatActivity {
     private Button buttonRegister;
     private EditText editTextid;
-    private EditText editTextPassword;
+    private EditText editTextPassword,passconfirm,unam1,umobile;
     private TextView textViewSignin;
+    DatabaseReference db;
 
     private ProgressDialog progressDialog;
     private FirebaseAuth firebaseAuth;
@@ -54,8 +57,11 @@ public class upload extends AppCompatActivity {
         buttonRegister=findViewById(R.id.buttonRegister);
         editTextid=findViewById(R.id.userId);
         editTextPassword=findViewById(R.id.userPassword);
+        passconfirm=findViewById(R.id.userPasswordconfirm);
+        unam1=findViewById(R.id.username1);
+        umobile=findViewById(R.id.userm);
         //textViewSignin=findViewById(R.id.textViewSignIn);
-
+        db= FirebaseDatabase.getInstance().getReference().child("Users");
         buttonRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -66,7 +72,7 @@ public class upload extends AppCompatActivity {
     }
 
     private void registerUser(){
-        String email = editTextid.getText().toString().trim();
+        final String email = editTextid.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
 
         if(TextUtils.isEmpty(email)){
@@ -80,6 +86,10 @@ public class upload extends AppCompatActivity {
             Toast.makeText(this, "Please Enter Password", Toast.LENGTH_SHORT).show();
             return;
         }
+        if(passconfirm.getText().toString().trim().equals(password)==false)
+        {
+            Toast.makeText(this, "Passwords donot Match", Toast.LENGTH_SHORT).show();
+        }
         //if validations are ok
 
         progressDialog.setMessage("Registering For user...");
@@ -91,6 +101,13 @@ public class upload extends AppCompatActivity {
                 if(task.isSuccessful()){
                     progressDialog.dismiss();
                     Toast.makeText(upload.this, "Registered Successfully", Toast.LENGTH_SHORT).show();
+
+                    //Toast.makeText(upload.this, firebaseAuth.getUid().toString(), Toast.LENGTH_SHORT).show();
+//
+//
+                    db.child(firebaseAuth.getUid()).child("Mobilenumber").setValue(umobile.getText().toString().trim());
+                    db.child(firebaseAuth.getUid()).child("email").setValue(email);
+                    db.child(firebaseAuth.getUid()).child("name").setValue(unam1.getText().toString().trim());
                     Intent a2 = new Intent(upload.this, MainActivity.class);
                     startActivity(a2);
                     upload.this.finish();

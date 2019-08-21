@@ -14,6 +14,7 @@ import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -29,6 +30,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -36,16 +38,21 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 public class edithouseinfo extends AppCompatActivity {
+    FirebaseStorage storage = FirebaseStorage.getInstance();
+    StorageReference gsReference;
     private int STORAGE_PERMISSION_CODE=1;
     Spinner conhouse, room, toilet, kitchen, yearsofstaying;
     ImageView imageBox1, cameraBtn12;
@@ -99,12 +106,9 @@ public class edithouseinfo extends AppCompatActivity {
         mprogress= new ProgressDialog(this);
         db= FirebaseDatabase.getInstance().getReference().child("forms");
 
-        FirebaseStorage storage = FirebaseStorage.getInstance();
-        StorageReference gsReference;
         //final StorageReference storageRef = storage.getReferenceFromUrl("gs://survey-7f227.appspot.com/");    //change the url according to your firebase app
         // cameraBtn1=findViewById(R.id.cameraBtn1);
         //  imageBox1=findViewById(R.id.imageBox1);
-        imageBox1.setVisibility(View.GONE);
         //imageBox1.setVisibility(View.GONE);
         save=findViewById(R.id.saveexit);
         Intent iin= getIntent();
@@ -288,6 +292,27 @@ public class edithouseinfo extends AppCompatActivity {
         db.child(d).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                imageUrl=dataSnapshot.child("houseoffamily").child("imageUrl").getValue().toString();
+                gsReference=storage.getReferenceFromUrl(imageUrl);
+
+                try {
+                    final File localFile = File.createTempFile("image", "jpg");
+                    gsReference.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                            pathToFile=localFile.getAbsolutePath();
+                            Bitmap bitmap = BitmapFactory.decodeFile(pathToFile);
+                            imageBox1.setImageBitmap(bitmap);
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+
+                        }
+                    });
+                } catch (IOException e) {
+
+                }
                 conhouse.setSelection(option.indexOf(dataSnapshot.child("houseoffamily").child("conhouse").getValue().toString()));
                 area.setText(dataSnapshot.child("houseoffamily").child("area").getValue().toString());
                 //IMAGE
