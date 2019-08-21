@@ -1,0 +1,56 @@
+{
+  "project_info": {
+    "project_number": "1051121084304",
+    "firebase_url": "https://survey-7f227.firebaseio.com",
+    "project_id": "survey-7f227",
+    "storage_bucket": "survey-7f227.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1051121084304:android:a87cbb53af105de0",
+        "android_client_info": {
+          "package_name": "com.example.slumsurvey"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1051121084304-g7p8j4p0aqb4fdhnl7d11uuogogo3c5t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.slumsurvey",
+            "certificate_hash": "9e15d883624e5d0b40df0231f66e830f57a02991"
+          }
+        },
+        {
+          "client_id": "1051121084304-qopqpnfmgg1vqqnskr8l89ccfvf4lovb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.slumsurvey",
+            "certificate_hash": "ab0cc92a7ac23bba078593f5ec893d2ad0b1ed8e"
+          }
+        },
+        {
+          "client_id": "1051121084304-hr063ej7fa34or7fppeccuk30hmhnd92.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDunR_Iq4naOoK1EpU6CkIlvq0K6NgfqlI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1051121084304-hr063ej7fa34or7fppeccuk30hmhnd92.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/edithead"
+        android:title="EDIT HEAD OF FAMILY" />
+    <item
+        android:id="@+id/edithouseinfo"
+        android:title="EDIT HOUSE INFO" />
+    <item
+        android:id="@+id/addhousemem"
+        android:title="ADD HOUSE MEMBER" />
+    <item
+        android:id="@+id/deletehousemem"
+        android:title="DELETE HOUSE MEMBER" />
+
+
+    <item
+        android:id="@+id/deleteentry"
+        android:title="DELETE ENTRY" />
+
+</menu>
