@@ -9,13 +9,13 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="-86dp"
-        tools:layout_editor_absoluteY="522dp">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="51dp">
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-
 
 
             <LinearLayout
@@ -58,306 +58,306 @@
                         android:id="@+id/adddesc"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginBottom="10dp"
                         android:layout_marginHorizontal="20dp"
+                        android:layout_marginBottom="10dp"
                         android:paddingVertical="10dp"
                         android:text="Name of Slum"
-                        android:textColor="#000000"
-                        android:textSize="18sp"
                         android:textAlignment="center"
-                        />
+                        android:textColor="#000000"
+                        android:textSize="18sp" />
+
                     <TextView
                         android:id="@+id/infoslumane"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginBottom="10dp"
                         android:layout_marginHorizontal="20dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/bginputtask"
                         android:paddingVertical="10dp"
                         android:text=""
-                        android:textColor="@color/colorPrimaryDark"
-                        android:textSize="18sp"
                         android:textAlignment="center"
-                        android:background="@drawable/bginputtask"/>
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="18sp" />
 
                     <!--HEADING-->
                     <TextView
                         android:id="@+id/adddesc"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginBottom="10dp"
                         android:layout_marginHorizontal="20dp"
+                        android:layout_marginBottom="10dp"
                         android:paddingVertical="10dp"
                         android:text="Head of family"
-                        android:textColor="#000000"
-                        android:textSize="18sp"
                         android:textAlignment="center"
-                        />
+                        android:textColor="#000000"
+                        android:textSize="18sp" />
                     <!--Box-->
                     <TextView
                         android:id="@+id/infoheadoffamily"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginBottom="10dp"
                         android:layout_marginHorizontal="20dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/bginputtask"
                         android:paddingVertical="10dp"
                         android:text=""
-                        android:textColor="@color/colorPrimaryDark"
-                        android:textSize="18sp"
                         android:textAlignment="center"
-                        android:background="@drawable/bginputtask"/>
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="18sp" />
 
 
                     <TextView
                         android:id="@+id/adddesc"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginBottom="10dp"
                         android:layout_marginHorizontal="20dp"
+                        android:layout_marginBottom="10dp"
                         android:paddingVertical="10dp"
                         android:text="Gender"
-                        android:textColor="#000000"
-                        android:textSize="18sp"
                         android:textAlignment="center"
-                        />
+                        android:textColor="#000000"
+                        android:textSize="18sp" />
+
                     <TextView
                         android:id="@+id/infogender"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:paddingVertical="10dp"
                         android:layout_marginHorizontal="20dp"
                         android:layout_marginBottom="10dp"
+                        android:background="@drawable/bginputtask"
+                        android:paddingVertical="10dp"
                         android:text=""
-                        android:textColor="@color/colorPrimaryDark"
-                        android:textSize="18sp"
                         android:textAlignment="center"
-                        android:background="@drawable/bginputtask"/>
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="18sp" />
 
                     <TextView
                         android:id="@+id/adddesc"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginBottom="10dp"
                         android:layout_marginHorizontal="20dp"
+                        android:layout_marginBottom="10dp"
                         android:paddingVertical="10dp"
                         android:text="Father"
-                        android:textColor="#000000"
-                        android:textSize="18sp"
                         android:textAlignment="center"
-                        />
+                        android:textColor="#000000"
+                        android:textSize="18sp" />
+
                     <TextView
                         android:id="@+id/infofathersname"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:paddingVertical="10dp"
                         android:layout_marginHorizontal="20dp"
                         android:layout_marginBottom="10dp"
+                        android:background="@drawable/bginputtask"
+                        android:paddingVertical="10dp"
                         android:text=""
-                        android:textColor="@color/colorPrimaryDark"
-                        android:textSize="18sp"
                         android:textAlignment="center"
-                        android:background="@drawable/bginputtask"/>
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="18sp" />
 
                     <TextView
                         android:id="@+id/adddesc"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginBottom="10dp"
                         android:layout_marginHorizontal="20dp"
+                        android:layout_marginBottom="10dp"
                         android:paddingVertical="10dp"
                         android:text="Age"
-                        android:textColor="#000000"
-                        android:textSize="18sp"
                         android:textAlignment="center"
-                        />
+                        android:textColor="#000000"
+                        android:textSize="18sp" />
+
                     <TextView
                         android:id="@+id/infoage"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:paddingVertical="10dp"
                         android:layout_marginHorizontal="20dp"
                         android:layout_marginBottom="10dp"
+                        android:background="@drawable/bginputtask"
+                        android:paddingVertical="10dp"
                         android:text=""
-                        android:textColor="@color/colorPrimaryDark"
-                        android:textSize="18sp"
                         android:textAlignment="center"
-                        android:background="@drawable/bginputtask"/>
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="18sp" />
 
                     <TextView
                         android:id="@+id/adddesc"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginBottom="10dp"
                         android:layout_marginHorizontal="20dp"
+                        android:layout_marginBottom="10dp"
                         android:paddingVertical="10dp"
                         android:text="Category"
-                        android:textColor="#000000"
-                        android:textSize="18sp"
                         android:textAlignment="center"
-                        />
+                        android:textColor="#000000"
+                        android:textSize="18sp" />
+
                     <TextView
                         android:id="@+id/infocategory"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:paddingVertical="10dp"
                         android:layout_marginHorizontal="20dp"
                         android:layout_marginBottom="10dp"
+                        android:background="@drawable/bginputtask"
+                        android:paddingVertical="10dp"
                         android:text=""
-                        android:textColor="@color/colorPrimaryDark"
-                        android:textSize="18sp"
                         android:textAlignment="center"
-                        android:background="@drawable/bginputtask"/>
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="18sp" />
 
                     <TextView
                         android:id="@+id/adddesc"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginBottom="10dp"
                         android:layout_marginHorizontal="20dp"
+                        android:layout_marginBottom="10dp"
                         android:paddingVertical="10dp"
                         android:text="Religion"
-                        android:textColor="#000000"
-                        android:textSize="18sp"
                         android:textAlignment="center"
-                        />
+                        android:textColor="#000000"
+                        android:textSize="18sp" />
+
                     <TextView
                         android:id="@+id/inforeligion"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:paddingVertical="10dp"
                         android:layout_marginHorizontal="20dp"
                         android:layout_marginBottom="10dp"
+                        android:background="@drawable/bginputtask"
+                        android:paddingVertical="10dp"
                         android:text=""
-                        android:textColor="@color/colorPrimaryDark"
-                        android:textSize="18sp"
                         android:textAlignment="center"
-                        android:background="@drawable/bginputtask"/>
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="18sp" />
 
                     <TextView
                         android:id="@+id/adddesc"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginBottom="10dp"
                         android:layout_marginHorizontal="20dp"
+                        android:layout_marginBottom="10dp"
                         android:paddingVertical="10dp"
                         android:text="Mobile Number"
-                        android:textColor="#000000"
-                        android:textSize="18sp"
                         android:textAlignment="center"
-                        />
+                        android:textColor="#000000"
+                        android:textSize="18sp" />
+
                     <TextView
                         android:id="@+id/infomobilenumber"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:paddingVertical="10dp"
                         android:layout_marginHorizontal="20dp"
                         android:layout_marginBottom="10dp"
+                        android:background="@drawable/bginputtask"
+                        android:paddingVertical="10dp"
                         android:text=""
-                        android:textColor="@color/colorPrimaryDark"
-                        android:textSize="18sp"
                         android:textAlignment="center"
-                        android:background="@drawable/bginputtask"/>
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="18sp" />
 
                     <TextView
                         android:id="@+id/adddesc"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginBottom="10dp"
                         android:layout_marginHorizontal="20dp"
+                        android:layout_marginBottom="10dp"
                         android:paddingVertical="10dp"
                         android:text="Address"
-                        android:textColor="#000000"
-                        android:textSize="18sp"
                         android:textAlignment="center"
-                        />
+                        android:textColor="#000000"
+                        android:textSize="18sp" />
+
                     <TextView
                         android:id="@+id/infoaddress"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:paddingVertical="10dp"
                         android:layout_marginHorizontal="20dp"
                         android:layout_marginBottom="10dp"
+                        android:background="@drawable/bginputtask"
+                        android:paddingVertical="10dp"
                         android:text=""
-                        android:textColor="@color/colorPrimaryDark"
-                        android:textSize="18sp"
                         android:textAlignment="center"
-                        android:background="@drawable/bginputtask"/>
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="18sp" />
 
                     <TextView
                         android:id="@+id/adddesc"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginBottom="10dp"
                         android:layout_marginHorizontal="20dp"
+                        android:layout_marginBottom="10dp"
                         android:paddingVertical="10dp"
                         android:text="Family Income Yearly"
-                        android:textColor="#000000"
-                        android:textSize="18sp"
                         android:textAlignment="center"
-                        />
+                        android:textColor="#000000"
+                        android:textSize="18sp" />
+
                     <TextView
                         android:id="@+id/infofamincome"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:paddingVertical="10dp"
                         android:layout_marginHorizontal="20dp"
                         android:layout_marginBottom="10dp"
+                        android:background="@drawable/bginputtask"
+                        android:paddingVertical="10dp"
                         android:text=""
-                        android:textColor="@color/colorPrimaryDark"
-                        android:textSize="18sp"
                         android:textAlignment="center"
-                        android:background="@drawable/bginputtask"/>
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="18sp" />
 
                     <TextView
                         android:id="@+id/adddesc"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginBottom="10dp"
                         android:layout_marginHorizontal="20dp"
+                        android:layout_marginBottom="10dp"
                         android:paddingVertical="10dp"
                         android:text="Nationality"
-                        android:textColor="#000000"
-                        android:textSize="18sp"
                         android:textAlignment="center"
-                        />
+                        android:textColor="#000000"
+                        android:textSize="18sp" />
+
                     <TextView
                         android:id="@+id/infonationality"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:paddingVertical="10dp"
                         android:layout_marginHorizontal="20dp"
                         android:layout_marginBottom="10dp"
+                        android:background="@drawable/bginputtask"
+                        android:paddingVertical="10dp"
                         android:text=""
-                        android:textColor="@color/colorPrimaryDark"
-                        android:textSize="18sp"
                         android:textAlignment="center"
-                        android:background="@drawable/bginputtask"/>
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="18sp" />
 
                     <TextView
                         android:id="@+id/adddesc"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginBottom="10dp"
                         android:layout_marginHorizontal="20dp"
+                        android:layout_marginBottom="10dp"
                         android:paddingVertical="10dp"
                         android:text="Aadhar Number"
-                        android:textColor="#000000"
-                        android:textSize="18sp"
                         android:textAlignment="center"
-                        />
+                        android:textColor="#000000"
+                        android:textSize="18sp" />
+
                     <TextView
                         android:id="@+id/infoaadhar"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:paddingVertical="10dp"
                         android:layout_marginHorizontal="20dp"
                         android:layout_marginBottom="10dp"
+                        android:background="@drawable/bginputtask"
+                        android:paddingVertical="10dp"
                         android:text=""
-                        android:textColor="@color/colorPrimaryDark"
-                        android:textSize="18sp"
                         android:textAlignment="center"
-                        android:background="@drawable/bginputtask"/>
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="18sp" />
 
                 </LinearLayout>
+
                 <TextView
                     android:id="@+id/adddesc"
                     android:layout_width="match_parent"
@@ -365,6 +365,19 @@
                     android:layout_marginBottom="10dp"
                     android:text="Family Members
 "
+                    android:textAlignment="center"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/familymemberno"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/bginputtask"
+                    android:paddingVertical="10dp"
+                    android:text=""
                     android:textAlignment="center"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="18sp" />
@@ -392,7 +405,6 @@
                 <!--android:background="@drawable/bginputtask"/>-->
 
 
-
                 <!--<TextView-->
                 <!--android:id="@+id/adddesc"-->
                 <!--android:layout_width="match_parent"-->
@@ -467,7 +479,6 @@
                 <!--android:background="@drawable/bginputtask"/>-->
 
 
-
                 <!--<TextView-->
                 <!--android:id="@+id/adddesc"-->
                 <!--android:layout_width="match_parent"-->
@@ -540,7 +551,6 @@
                 <!--android:textSize="18sp"-->
                 <!--android:textAlignment="center"-->
                 <!--android:background="@drawable/bginputtask"/>-->
-
 
 
                 <!--<TextView-->
@@ -622,6 +632,7 @@
                         tools:srcCompat="@drawable/loading" />
 
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -634,203 +645,204 @@
                         android:id="@+id/adddesc"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginBottom="10dp"
                         android:layout_marginHorizontal="20dp"
+                        android:layout_marginBottom="10dp"
                         android:paddingVertical="10dp"
                         android:text="Area Occupied"
-                        android:textColor="#000000"
-                        android:textSize="18sp"
                         android:textAlignment="center"
-                        />
+                        android:textColor="#000000"
+                        android:textSize="18sp" />
+
                     <TextView
                         android:id="@+id/infoareaoccupy"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
 
-                        android:layout_marginBottom="10dp"
                         android:layout_marginHorizontal="20dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/bginputtask"
                         android:paddingVertical="10dp"
                         android:text=""
-                        android:textColor="@color/colorPrimaryDark"
-                        android:textSize="18sp"
                         android:textAlignment="center"
-                        android:background="@drawable/bginputtask"/>
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="18sp" />
 
                     <TextView
                         android:id="@+id/adddesc"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginBottom="10dp"
                         android:layout_marginHorizontal="20dp"
+                        android:layout_marginBottom="10dp"
                         android:paddingVertical="10dp"
                         android:text="Area Constructed/Built-up"
-                        android:textColor="#000000"
-                        android:textSize="18sp"
                         android:textAlignment="center"
-                        />
+                        android:textColor="#000000"
+                        android:textSize="18sp" />
+
                     <TextView
                         android:id="@+id/infoareaconstructed"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginBottom="10dp"
                         android:layout_marginHorizontal="20dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/bginputtask"
                         android:paddingVertical="10dp"
                         android:text=""
-                        android:textColor="@color/colorPrimaryDark"
-                        android:textSize="18sp"
                         android:textAlignment="center"
-                        android:background="@drawable/bginputtask"/>
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="18sp" />
 
                     <TextView
                         android:id="@+id/adddesc"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginBottom="10dp"
                         android:layout_marginHorizontal="20dp"
+                        android:layout_marginBottom="10dp"
                         android:paddingVertical="10dp"
                         android:text="Condition of House"
-                        android:textColor="#000000"
-                        android:textSize="18sp"
                         android:textAlignment="center"
-                        />
+                        android:textColor="#000000"
+                        android:textSize="18sp" />
+
                     <TextView
                         android:id="@+id/infoconditionofhouse"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:paddingVertical="10dp"
                         android:layout_marginHorizontal="20dp"
                         android:layout_marginBottom="10dp"
+                        android:background="@drawable/bginputtask"
+                        android:paddingVertical="10dp"
                         android:text=""
-                        android:textColor="@color/colorPrimaryDark"
-                        android:textSize="18sp"
                         android:textAlignment="center"
-                        android:background="@drawable/bginputtask"/>
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="18sp" />
 
                     <TextView
                         android:id="@+id/adddesc"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginBottom="10dp"
                         android:layout_marginHorizontal="20dp"
+                        android:layout_marginBottom="10dp"
                         android:paddingVertical="10dp"
                         android:text="Rooms"
-                        android:textColor="#000000"
-                        android:textSize="18sp"
                         android:textAlignment="center"
-                        />
+                        android:textColor="#000000"
+                        android:textSize="18sp" />
+
                     <TextView
                         android:id="@+id/inforoom"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:paddingVertical="10dp"
                         android:layout_marginHorizontal="20dp"
                         android:layout_marginBottom="10dp"
+                        android:background="@drawable/bginputtask"
+                        android:paddingVertical="10dp"
                         android:text=""
-                        android:textColor="@color/colorPrimaryDark"
-                        android:textSize="18sp"
                         android:textAlignment="center"
-                        android:background="@drawable/bginputtask"/>
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="18sp" />
 
 
                     <TextView
                         android:id="@+id/adddesc"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginBottom="10dp"
                         android:layout_marginHorizontal="20dp"
+                        android:layout_marginBottom="10dp"
                         android:paddingVertical="10dp"
                         android:text="Toilet"
-                        android:textColor="#000000"
-                        android:textSize="18sp"
                         android:textAlignment="center"
-                        />
+                        android:textColor="#000000"
+                        android:textSize="18sp" />
+
                     <TextView
                         android:id="@+id/infotoilet"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:paddingVertical="10dp"
                         android:layout_marginHorizontal="20dp"
                         android:layout_marginBottom="10dp"
+                        android:background="@drawable/bginputtask"
+                        android:paddingVertical="10dp"
                         android:text=""
-                        android:textColor="@color/colorPrimaryDark"
-                        android:textSize="18sp"
                         android:textAlignment="center"
-                        android:background="@drawable/bginputtask"/>
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="18sp" />
 
                     <TextView
                         android:id="@+id/adddesc"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginBottom="10dp"
                         android:layout_marginHorizontal="20dp"
+                        android:layout_marginBottom="10dp"
                         android:paddingVertical="10dp"
                         android:text="Kitchens"
-                        android:textColor="#000000"
-                        android:textSize="18sp"
                         android:textAlignment="center"
-                        />
+                        android:textColor="#000000"
+                        android:textSize="18sp" />
+
                     <TextView
                         android:id="@+id/infokitchen"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:paddingVertical="10dp"
                         android:layout_marginHorizontal="20dp"
                         android:layout_marginBottom="10dp"
+                        android:background="@drawable/bginputtask"
+                        android:paddingVertical="10dp"
                         android:text=""
-                        android:textColor="@color/colorPrimaryDark"
-                        android:textSize="18sp"
                         android:textAlignment="center"
-                        android:background="@drawable/bginputtask"/>
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="18sp" />
 
                     <TextView
                         android:id="@+id/adddesc"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginBottom="10dp"
                         android:layout_marginHorizontal="20dp"
+                        android:layout_marginBottom="10dp"
                         android:paddingVertical="10dp"
                         android:text="Years of Staying"
-                        android:textColor="#000000"
-                        android:textSize="18sp"
                         android:textAlignment="center"
-                        />
+                        android:textColor="#000000"
+                        android:textSize="18sp" />
+
                     <TextView
                         android:id="@+id/infoyearofstaying"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:paddingVertical="10dp"
                         android:layout_marginHorizontal="20dp"
                         android:layout_marginBottom="10dp"
+                        android:background="@drawable/bginputtask"
+                        android:paddingVertical="10dp"
                         android:text=""
-                        android:textColor="@color/colorPrimaryDark"
-                        android:textSize="18sp"
                         android:textAlignment="center"
-                        android:background="@drawable/bginputtask"/>
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="18sp" />
 
                     <TextView
                         android:id="@+id/adddesc"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginBottom="10dp"
                         android:layout_marginHorizontal="20dp"
+                        android:layout_marginBottom="10dp"
                         android:paddingVertical="10dp"
                         android:text="Consent Signed"
-                        android:textColor="#000000"
-                        android:textSize="18sp"
                         android:textAlignment="center"
-                        />
+                        android:textColor="#000000"
+                        android:textSize="18sp" />
+
                     <TextView
                         android:id="@+id/infoconsentsigned"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:paddingVertical="10dp"
                         android:layout_marginHorizontal="20dp"
                         android:layout_marginBottom="10dp"
+                        android:background="@drawable/bginputtask"
+                        android:paddingVertical="10dp"
                         android:text=""
-                        android:textColor="@color/colorPrimaryDark"
-                        android:textSize="18sp"
                         android:textAlignment="center"
-                        android:background="@drawable/bginputtask"/>
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="18sp" />
+
                     <ListView
                         android:id="@+id/mylistmember"
                         android:layout_width="match_parent"
@@ -841,12 +853,7 @@
                 </LinearLayout>
 
 
-                </LinearLayout>
-
-
-
-
-
+            </LinearLayout>
 
 
         </androidx.appcompat.widget.LinearLayoutCompat>

@@ -66,7 +66,7 @@
                         android:textSize="18sp" />
 
                     <EditText
-                        android:id="@+id/areaed"
+                        android:id="@+id/area"
                         android:layout_width="match_parent"
                         android:layout_height="55dp"
                         android:background="@drawable/bginputtask"
@@ -97,7 +97,7 @@
                         android:textSize="18sp" />
 
                     <EditText
-                        android:id="@+id/areabuilted"
+                        android:id="@+id/areabuilt"
                         android:layout_width="match_parent"
                         android:layout_height="55dp"
                         android:background="@drawable/bginputtask"
@@ -129,7 +129,7 @@
 
 
                     <ImageView
-                        android:id="@+id/imageBox12ed"
+                        android:id="@+id/imageBox1"
                         android:layout_margin="30dp"
                         android:layout_width="match_parent"
                         android:layout_height="250dp"
@@ -137,7 +137,7 @@
                         android:layout_marginTop="5dp" />
 
                     <ImageView
-                        android:id="@+id/cameraBtn12ede"
+                        android:id="@+id/cameraBtn12"
                         android:layout_width="match_parent"
                         android:layout_height="53dp"
                         app:srcCompat="@android:drawable/ic_menu_camera" />
@@ -161,7 +161,7 @@
                         android:textColor="@color/colorPrimaryDark"
                         android:textSize="20sp" />
                     <Spinner
-                        android:id="@+id/conhouseed"
+                        android:id="@+id/conhouse"
                         android:layout_width="match_parent"
                         android:layout_height="55dp"
                         android:background="@drawable/bginputtask" />
@@ -211,7 +211,7 @@
                         android:textSize="18sp" />
 
                     <Spinner
-                        android:id="@+id/roomed"
+                        android:id="@+id/room"
                         android:layout_width="match_parent"
                         android:layout_height="55dp"
                         android:background="@drawable/bginputtask" />
@@ -237,7 +237,7 @@
                         android:textSize="18sp" />
 
                     <Spinner
-                        android:id="@+id/toileted"
+                        android:id="@+id/toilet"
                         android:layout_width="match_parent"
                         android:layout_height="55dp"
                         android:background="@drawable/bginputtask" />
@@ -261,7 +261,7 @@
                         android:textSize="18sp" />
 
                     <Spinner
-                        android:id="@+id/kitchened"
+                        android:id="@+id/kitchen"
                         android:layout_width="match_parent"
                         android:layout_height="55dp"
                         android:background="@drawable/bginputtask" />
@@ -300,7 +300,7 @@
                         android:textColorHint="#B5B5B5" />-->
 
                     <Spinner
-                        android:id="@+id/yosspinnered"
+                        android:id="@+id/yosspinner"
                         android:layout_width="match_parent"
                         android:layout_height="55dp"
                         android:background="@drawable/bginputtask" />
@@ -325,7 +325,7 @@
                         android:textSize="18sp" />
 
                     <EditText
-                        android:id="@+id/consented"
+                        android:id="@+id/consent"
                         android:layout_width="match_parent"
                         android:layout_height="55dp"
                         android:background="@drawable/bginputtask"
@@ -337,7 +337,7 @@
                         android:textColorHint="#B5B5B5" />
                 </LinearLayout>
                 <Button
-                    android:id="@+id/saveexited"
+                    android:id="@+id/saveexit"
                     android:layout_width="match_parent"
                     android:layout_height="55dp"
                     android:layout_marginLeft="16dp"

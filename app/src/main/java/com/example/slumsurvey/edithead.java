@@ -1,5 +1,6 @@
 package com.example.slumsurvey;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,6 +9,7 @@ import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -23,23 +25,32 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 public class edithead extends AppCompatActivity {
+    FirebaseStorage storage = FirebaseStorage.getInstance();
+    StorageReference gsReference;
     private int STORAGE_PERMISSION_CODE=1;
     Spinner spinner,spinner2,catspinner,relspinner,fammemspinner,nationalotyspinner;//ADDED;
-    ImageView cameraBtn, imageBox,cameraBtn1, imageBox1;
+    ImageView cameraBtn, imageBox;
     EditText hof,address,family ,adarcard,f_name,hof_age,mob_number;
     appformfirebase apff1;
     TextView adartext;
@@ -94,7 +105,7 @@ public class edithead extends AppCompatActivity {
         // nationaloty=findViewById(R.id.famiincome);
         adartext=findViewById(R.id.adartext);
         adarcard=findViewById(R.id.adarcard1ed);
-        f_name=findViewById(R.id.Fathersnameed);
+            f_name=findViewById(R.id.Fathersnameed);
         hof_age=findViewById(R.id.hodageed);
         mob_number=findViewById(R.id.mobilenoed);
         firebaseAuth=FirebaseAuth.getInstance();
@@ -102,7 +113,6 @@ public class edithead extends AppCompatActivity {
         mprogress= new ProgressDialog(this);
         db= FirebaseDatabase.getInstance().getReference().child("forms");
 
-        FirebaseStorage storage = FirebaseStorage.getInstance();
         final StorageReference storageRef = storage.getReferenceFromUrl("gs://survey-7f227.appspot.com/");    //change the url according to your firebase app
         // cameraBtn1=findViewById(R.id.cameraBtn1);
         //  imageBox1=findViewById(R.id.imageBox1);
@@ -130,7 +140,7 @@ public class edithead extends AppCompatActivity {
         }
 
         // Spinner Drop down elements
-        List<String> categories = new ArrayList<String>();
+        final List<String> categories = new ArrayList<String>();
         categories.add("Bazigar Basti");
         categories.add("Bharat Nagar, Nabha Road");
         categories.add("Bharat Nagar, Railway Line");
@@ -154,13 +164,13 @@ public class edithead extends AppCompatActivity {
         categories.add("Darshana Colony");
         categories.add("Sanjay Colony");
 
-        List<String> gen = new ArrayList<String>();
+        final List<String> gen = new ArrayList<String>();
         gen.add("Male");
         gen.add("Female");
         gen.add("Other");
 
 
-        List<String> cat = new ArrayList<String>();
+        final List<String> cat = new ArrayList<String>();
         cat.add("General");
         cat.add("OBC");
         cat.add("SC");
@@ -169,7 +179,7 @@ public class edithead extends AppCompatActivity {
 
 
 
-        List<String> rel = new ArrayList<String>();
+        final List<String> rel = new ArrayList<String>();
         rel.add("Hindu");
         rel.add("Muslim");
         rel.add("Sikh");
@@ -177,7 +187,7 @@ public class edithead extends AppCompatActivity {
         rel.add("Other");
 
 
-        List<String> fmno = new ArrayList<String>();
+        final List<String> fmno = new ArrayList<String>();
         fmno.add("0");
         fmno.add("1");
         fmno.add("2");
@@ -193,7 +203,7 @@ public class edithead extends AppCompatActivity {
         fmno.add("12");
 
         //ADDED
-        List<String> nat = new ArrayList<String>();
+        final List<String> nat = new ArrayList<String>();
         nat.add("Indian");
         nat.add("Non-Indian");
 
@@ -377,6 +387,76 @@ public class edithead extends AppCompatActivity {
 //
 //            }
 //        });
+
+        db.child(d).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                gsReference=storage.getReferenceFromUrl(dataSnapshot.child("headoffamily").child("imageUrl").getValue().toString());
+
+                try {
+                    final File localFile = File.createTempFile("image", "jpg");
+                    gsReference.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                            pathToFile=localFile.getAbsolutePath();
+                            Bitmap bitmap = BitmapFactory.decodeFile(pathToFile);
+                            imageBox.setImageBitmap(bitmap);
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+
+                        }
+                    });
+                } catch (IOException e) {
+
+                }
+
+                gsReference=storage.getReferenceFromUrl(dataSnapshot.child("houseoffamily").child("imageUrl").getValue().toString());
+
+                try {
+                    final File localFile = File.createTempFile("image", "jpg");
+                    gsReference.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                            pathToFile=localFile.getAbsolutePath();
+                            Bitmap bitmap = BitmapFactory.decodeFile(pathToFile);
+                            imageBox.setImageBitmap(bitmap);
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+
+                        }
+                    });
+                } catch (IOException e) {
+
+                }
+
+                spinner.setSelection(categories.indexOf(dataSnapshot.child("headoffamily").child("nameofslum").getValue().toString()));
+                hof.setText(dataSnapshot.child("headoffamily").child("headoffamily").getValue().toString());
+                //IMAGE
+                spinner2.setSelection(gen.indexOf(dataSnapshot.child("headoffamily").child("gender").getValue().toString()));
+                catspinner.setSelection(cat.indexOf(dataSnapshot.child("headoffamily").child("category").getValue().toString()));
+                relspinner.setSelection(rel.indexOf(dataSnapshot.child("headoffamily").child("religion").getValue().toString()));
+                f_name.setText(dataSnapshot.child("headoffamily").child("fathername").getValue().toString());
+                hof_age.setText(dataSnapshot.child("headoffamily").child("hofage").getValue().toString());
+                mob_number.setText(dataSnapshot.child("headoffamily").child("mobilenumber").getValue().toString());
+                address.setText(dataSnapshot.child("headoffamily").child("address").getValue().toString());
+                family.setText(dataSnapshot.child("headoffamily").child("familyincome").getValue().toString());
+                nationalotyspinner.setSelection(nat.indexOf(dataSnapshot.child("headoffamily").child("nationality").getValue().toString()));
+                adarcard.setText(dataSnapshot.child("headoffamily").child("aadhar").getValue().toString());
+                fammemspinner.setSelection(fmno.indexOf(dataSnapshot.child("headoffamily").child("numberofmembers").getValue().toString()));
+
+                //IF ERROR OCCURS COME HERE
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
         save.setOnClickListener(new View.OnClickListener() {
 

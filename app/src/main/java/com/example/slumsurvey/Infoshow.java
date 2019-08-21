@@ -43,7 +43,7 @@ public class Infoshow extends AppCompatActivity {
     DatabaseReference db;
     FirebaseAuth firebaseAuth;
     ImageView image1, image2;
-    TextView t0,t1,t2,t3,t4,t5,t6,t7,t8,t9,t10,t11,t12,t13,t14,t15,t16,t17,t18,t19;
+    TextView t0,t1,t2,t3,t4,t5,t6,t7,t8,t9,t10,t11,t12,t13,t14,t15,t16,t17,t18,t19, t20;
     ArrayList<String> m1,m2,m3,m4,m5,m6,mid;
     ListView mylist1;
     Infoshow.myhelperclass obj;
@@ -78,6 +78,7 @@ public class Infoshow extends AppCompatActivity {
         t17=findViewById(R.id.infokitchen);
         t18=findViewById(R.id.infoyearofstaying);
         t19=findViewById(R.id.infoconsentsigned);
+        t20=findViewById(R.id.familymemberno);
         mylist1=findViewById(R.id.mylistmember);
 
 
@@ -175,6 +176,7 @@ public class Infoshow extends AppCompatActivity {
                 t17.setText(dataSnapshot.child("houseoffamily").child("kitchen").getValue().toString());
                 t18.setText(dataSnapshot.child("houseoffamily").child("yearsofstaying").getValue().toString());
                 t19.setText(dataSnapshot.child("houseoffamily").child("consent").getValue().toString());
+                t20.setText(dataSnapshot.child("headoffamily").child("numberofmembers").getValue().toString());
             }
 
             @Override
@@ -250,7 +252,10 @@ public class Infoshow extends AppCompatActivity {
         }
         else if(item.getItemId()==R.id.edithouseinfo)
         {
-
+            Intent a1 = new Intent(Infoshow.this,edithouseinfo.class);
+            a1.putExtra("id", d);
+            startActivity(a1); //Error here
+            Infoshow.this.finish();
 
         }
         else if(item.getItemId()==R.id.deleteentry)
