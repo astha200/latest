@@ -109,7 +109,7 @@
                     android:layout_height="wrap_content">
 
                     <TextView
-                        android:id="@+id/adddesc"
+                        android:id="@+id/adddesc0"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="10dp"
@@ -146,7 +146,7 @@
                 android:layout_height="wrap_content">
 
                 <TextView
-                    android:id="@+id/adddesc"
+                    android:id="@+id/adddesc1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
@@ -171,7 +171,7 @@
                 android:layout_height="wrap_content">
 
                 <TextView
-                    android:id="@+id/adddesc"
+                    android:id="@+id/adddesc2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
@@ -196,7 +196,7 @@
                 android:layout_height="wrap_content">
 
                 <TextView
-                    android:id="@+id/adddesc"
+                    android:id="@+id/adddesc3"
                     android:textSize="18sp"
                     android:textColor="@color/colorPrimaryDark"
                     android:text="Religion"
@@ -221,7 +221,7 @@
                         android:layout_height="wrap_content">
 
                         <TextView
-                            android:id="@+id/adddesc"
+                            android:id="@+id/adddesc4"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="10dp"
@@ -251,7 +251,7 @@
                         android:layout_height="wrap_content">
 
                         <TextView
-                            android:id="@+id/adddesc"
+                            android:id="@+id/adddesc5"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="10dp"
@@ -281,7 +281,7 @@
                         android:layout_height="wrap_content">
 
                         <TextView
-                            android:id="@+id/adddesc"
+                            android:id="@+id/adddesc6"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="10dp"
@@ -312,7 +312,7 @@
                 android:layout_height="wrap_content">
 
                     <TextView
-                        android:id="@+id/adddesc"
+                        android:id="@+id/adddesc7"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="10dp"
@@ -341,7 +341,7 @@
                     android:layout_height="wrap_content">
 
                     <TextView
-                        android:id="@+id/adddesc"
+                        android:id="@+id/adddesc8"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="10dp"
@@ -372,7 +372,7 @@
                     android:layout_height="wrap_content">
 
                     <TextView
-                        android:id="@+id/adddesc"
+                        android:id="@+id/adddesc9"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="10dp"
@@ -441,14 +441,14 @@
                     android:layout_height="wrap_content">
 
                     <TextView
-                        android:id="@+id/adddesc"
+                        android:id="@+id/adddesc10"
                         android:textSize="18sp"
                         android:textColor="@color/colorPrimaryDark"
                         android:text="No of Family Members"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
                     <TextView
-                        android:id="@+id/adddesc"
+                        android:id="@+id/adddesc11"
                         android:textSize="18sp"
                         android:textColor="@color/colorPrimaryDark"
                         android:text="(excluding Head of family)"

@@ -24,7 +24,6 @@
         <activity android:name=".Main2Activity" />
         <activity android:name=".Infoshow" />
         <activity android:name=".mysubmission" />
-        <activity android:name=".dash2" />
         <activity android:name=".userdisplay" />
         <activity android:name=".houseform" />
         <activity android:name=".familymembers" />

@@ -81,7 +81,7 @@
 
                     <!--HEADING-->
                     <TextView
-                        android:id="@+id/adddesc"
+                        android:id="@+id/adddesc0"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginBottom="10dp"
@@ -108,7 +108,7 @@
 
 
                     <TextView
-                        android:id="@+id/adddesc"
+                        android:id="@+id/adddesc1"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginBottom="10dp"
@@ -133,7 +133,7 @@
                         android:background="@drawable/bginputtask"/>
 
                     <TextView
-                        android:id="@+id/adddesc"
+                        android:id="@+id/adddesc2"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginBottom="10dp"
@@ -158,7 +158,7 @@
                         android:background="@drawable/bginputtask"/>
 
                     <TextView
-                        android:id="@+id/adddesc"
+                        android:id="@+id/adddesc3"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginBottom="10dp"
@@ -183,7 +183,7 @@
                         android:background="@drawable/bginputtask"/>
 
                     <TextView
-                        android:id="@+id/adddesc"
+                        android:id="@+id/adddesc4"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginBottom="10dp"
@@ -208,7 +208,7 @@
                         android:background="@drawable/bginputtask"/>
 
                     <TextView
-                        android:id="@+id/adddesc"
+                        android:id="@+id/adddesc5"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginBottom="10dp"
@@ -233,7 +233,7 @@
                         android:background="@drawable/bginputtask"/>
 
                     <TextView
-                        android:id="@+id/adddesc"
+                        android:id="@+id/adddesc6"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginBottom="10dp"
@@ -258,7 +258,7 @@
                         android:background="@drawable/bginputtask"/>
 
                     <TextView
-                        android:id="@+id/adddesc"
+                        android:id="@+id/adddesc7"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginBottom="10dp"
@@ -283,7 +283,7 @@
                         android:background="@drawable/bginputtask"/>
 
                     <TextView
-                        android:id="@+id/adddesc"
+                        android:id="@+id/adddesc8"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginBottom="10dp"
@@ -308,7 +308,7 @@
                         android:background="@drawable/bginputtask"/>
 
                     <TextView
-                        android:id="@+id/adddesc"
+                        android:id="@+id/adddesc9"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginBottom="10dp"
@@ -333,7 +333,7 @@
                         android:background="@drawable/bginputtask"/>
 
                     <TextView
-                        android:id="@+id/adddesc"
+                        android:id="@+id/adddesc10"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginBottom="10dp"
@@ -359,7 +359,7 @@
 
                 </LinearLayout>
                 <TextView
-                    android:id="@+id/adddesc"
+                    android:id="@+id/adddesc11"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
@@ -631,7 +631,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/adddesc"
+                        android:id="@+id/adddesc12"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginBottom="10dp"
@@ -657,7 +657,7 @@
                         android:background="@drawable/bginputtask"/>
 
                     <TextView
-                        android:id="@+id/adddesc"
+                        android:id="@+id/adddesc13"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginBottom="10dp"
@@ -682,7 +682,7 @@
                         android:background="@drawable/bginputtask"/>
 
                     <TextView
-                        android:id="@+id/adddesc"
+                        android:id="@+id/adddesc14"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginBottom="10dp"
@@ -707,7 +707,7 @@
                         android:background="@drawable/bginputtask"/>
 
                     <TextView
-                        android:id="@+id/adddesc"
+                        android:id="@+id/adddesc15"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginBottom="10dp"
@@ -733,7 +733,7 @@
 
 
                     <TextView
-                        android:id="@+id/adddesc"
+                        android:id="@+id/adddesc16"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginBottom="10dp"
@@ -758,7 +758,7 @@
                         android:background="@drawable/bginputtask"/>
 
                     <TextView
-                        android:id="@+id/adddesc"
+                        android:id="@+id/adddesc17"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginBottom="10dp"
@@ -783,7 +783,7 @@
                         android:background="@drawable/bginputtask"/>
 
                     <TextView
-                        android:id="@+id/adddesc"
+                        android:id="@+id/adddesc18"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginBottom="10dp"
@@ -808,7 +808,7 @@
                         android:background="@drawable/bginputtask"/>
 
                     <TextView
-                        android:id="@+id/adddesc"
+                        android:id="@+id/adddesc19"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginBottom="10dp"
