@@ -78,6 +78,7 @@ public class edithead extends AppCompatActivity {
     private ImageView imageView;
 
     String slumname, genderstring, category, religion, nationality, numberofmembers, hofstring, fathername, hofage, mobilenumber, addressstring, familyincome, aadhar, imageUrl="not available";
+    String test="not upload";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

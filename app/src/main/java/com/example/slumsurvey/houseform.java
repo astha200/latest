@@ -74,7 +74,7 @@
         static final int REQUEST_IMAGE_CAPTURE = 1;
         DatabaseReference db;
         FirebaseAuth firebaseAuth;
-        String pathToFile;
+        String test="notupload";
         String id;
         //private Uri filePath;
         Uri imageUri=null;
@@ -276,7 +276,7 @@
         {
         consent.setError("This field cannot be blank");
         }
-        else if(imageUrl=="not available"){
+        else if(imageUrl=="not available"||test!="upload"){
                 Toast.makeText(houseform.this, "Wait for the image to upload/Upload image", Toast.LENGTH_SHORT).show();
         }
         else{
@@ -388,6 +388,7 @@
         @Override
         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
         mprogress.dismiss();
+        test="upload";
         imageBox12.setVisibility(View.VISIBLE);
         imageBox12.setImageURI(imageUri);
 

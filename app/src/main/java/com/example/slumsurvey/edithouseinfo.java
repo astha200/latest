@@ -66,6 +66,7 @@ public class edithouseinfo extends AppCompatActivity {
     FirebaseAuth firebaseAuth;
     String pathToFile;
     String d;
+    String test="not upload";
 
     //FROM upload.java
     Uri imageUri=null;
@@ -448,6 +449,7 @@ public class edithouseinfo extends AppCompatActivity {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     mprogress.dismiss();
+                    test="upload";
                     imageBox1.setVisibility(View.VISIBLE);
                     imageBox1.setImageURI(imageUri);
 

@@ -80,7 +80,7 @@ public class applicationform extends AppCompatActivity {
     String nameofslum,headof,gender;
     DatabaseReference db;
     FirebaseAuth firebaseAuth;
-    String pathToFile;
+    String test="notupload";
 
     //FROM upload.java
     Uri imageUri=null;
@@ -418,7 +418,7 @@ public class applicationform extends AppCompatActivity {
                 {
                     adarcard.setError("This field cannot be blank");
                 }
-                else if(imageUrl=="not available"){
+                else if(imageUrl=="not available"||test!="upload"){
                     Toast.makeText(applicationform.this, "Wait for the image to upload/Upload image", Toast.LENGTH_SHORT).show();
                 }
                 else {
@@ -524,6 +524,7 @@ public class applicationform extends AppCompatActivity {
             filepath.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    test="upload";
                     mprogress.dismiss();
                     imageBox.setVisibility(View.VISIBLE);
                     imageBox.setImageURI(imageUri);
