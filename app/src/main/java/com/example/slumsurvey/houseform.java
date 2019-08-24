@@ -44,7 +44,6 @@
         import android.provider.MediaStore;
         import android.view.View;
         import android.widget.Button;
-        import android.widget.ImageView;
         import android.widget.Toast;
 
         import com.google.android.gms.tasks.OnSuccessListener;
@@ -53,6 +52,7 @@
         import com.google.firebase.storage.UploadTask;
 
 
+        import java.io.ByteArrayOutputStream;
         import java.io.File;
         import java.io.IOException;
         import java.nio.file.FileVisitOption;
@@ -216,38 +216,10 @@
         @Override
         public void onClick(View view) {
 
-//                ContentValues values=new ContentValues();
-//                values.put(MediaStore.Images.Media.TITLE,"s");
-//                imageUri=getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,values);
-//                Intent c=new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//                c.putExtra(MediaStore.EXTRA_OUTPUT,imageUri);
-//                startActivityForResult(c,CAMERA_REQUEST_COSE);
-
-//                ContentValues values=new ContentValues();
-//                values.put(MediaStore.Images.Media.TITLE,"s");
-//                imageUri=getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,values);
-//
-//                Intent c=new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//                File photoFile = null;
-//                photoFile = createPhotoFile();
-//                if(photoFile!=null) {
-//                    pathToFile = photoFile.getAbsolutePath();
-//                    Uri photoURI = FileProvider.getUriForFile(houseform.this, "com.example.slumsurvey.fileprovider", photoFile);
-//                    c.putExtra(MediaStore.EXTRA_OUTPUT,photoURI);
-//                    startActivityForResult(c,CAMERA_REQUEST_COSE);
-//                    //startActivityForResult(c,CAMERA_REQUEST_COSE);
-//
-//                }
-//
-//                c.putExtra(MediaStore.EXTRA_OUTPUT,imageUri);
-//                //startActivityForResult(c,CAMERA_REQUEST_COSE);
-
-        ContentValues values=new ContentValues();
-        values.put(MediaStore.Images.Media.TITLE,"s");
-        imageUri=getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,values);
-        Intent c=new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        c.putExtra(MediaStore.EXTRA_OUTPUT,imageUri);
-        startActivityForResult(c,CAMERA_REQUEST_COSE);
+                Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+                        startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+                }
 
         }
 
@@ -376,29 +348,40 @@
         protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode==CAMERA_REQUEST_COSE&& resultCode==RESULT_OK )
-        {
+                if(requestCode==CAMERA_REQUEST_COSE&& resultCode==RESULT_OK ) {
 
-        mprogress.setMessage("uploading image");
-//            @SuppressWarnings("VisibleForTests") Uri uri=data.getData();
-        StorageReference filepath=mStorage.child("photos").child(imageUri.getLastPathSegment().toString());
-        //Toast.makeText(this, imageUri.toString(), Toast.LENGTH_SHORT).show();
-        imageUrl = filepath.toString();
-        filepath.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-        @Override
-        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-        mprogress.dismiss();
-        test="upload";
-        imageBox12.setVisibility(View.VISIBLE);
-        imageBox12.setImageURI(imageUri);
+                        mprogress.setMessage("uploading image");
+
+                        Bundle extras = data.getExtras();
+                        final Bitmap imageBitmap = (Bitmap) extras.get("data");
+                        Toast.makeText(this, imageBitmap.toString(), Toast.LENGTH_SHORT).show();
+                        ByteArrayOutputStream byteArrayOutputStream=new ByteArrayOutputStream();
+                        imageBitmap.compress(Bitmap.CompressFormat.JPEG,100,byteArrayOutputStream);
 
 
+                        final byte[]  thumb_byte=byteArrayOutputStream.toByteArray();
 
+                        long  time1 = (long) (System.currentTimeMillis());
+
+                        String ts =  String.valueOf(time1);
+                        Toast.makeText(this, ts, Toast.LENGTH_SHORT).show();
+                        StorageReference filepath = mStorage.child("photos").child(firebaseAuth.getUid()+ts);
+                        imageUrl = filepath.toString();
+                        // Toast.makeText(this, imageUrl, Toast.LENGTH_SHORT).show();
+                        filepath.putBytes(thumb_byte).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                @Override
+                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                        Toast.makeText(houseform.this, "succesful", Toast.LENGTH_SHORT).show();
+                                        test="upload";
+                                        imageBox12.setVisibility(View.VISIBLE);
+                                        imageBox12.setImageBitmap(imageBitmap);
+                                }
+                        });
+
+
+                }
         }
-        });
 
-        }
-        }
 
 
         public void onBackPressed() {

@@ -43,8 +43,14 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.security.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -80,7 +86,9 @@ public class applicationform extends AppCompatActivity {
     String nameofslum,headof,gender;
     DatabaseReference db;
     FirebaseAuth firebaseAuth;
-    String test="notupload";
+    String test="notuploaded";
+    public Boolean flag =false;
+    Bitmap thumb_bitmap;
 
     //FROM upload.java
     Uri imageUri=null;
@@ -88,11 +96,15 @@ public class applicationform extends AppCompatActivity {
     private StorageReference mStorage;
     private ProgressDialog mprogress;
     //till here
+    File destFile,file;
+    public static final String IMAGE_DIRECTORY = "ImageScalling";
 
+    private SimpleDateFormat dateFormatter;
     private Uri filePath;
     ProgressDialog pd;
     private final int PICK_IMAGE_REQUEST = 71;
     private ImageView imageView;
+
 
     String slumname, genderstring, category, religion, nationality, numberofmembers, hofstring, fathername, hofage, mobilenumber, addressstring, familyincome, aadhar, imageUrl="not available";
 
@@ -139,6 +151,11 @@ public class applicationform extends AppCompatActivity {
         save=findViewById(R.id.savebtn);
 
 
+        file = new File(Environment.getExternalStorageDirectory()
+                + "/" + IMAGE_DIRECTORY);
+        if (!file.exists()) {
+            file.mkdirs();
+        }
         // Spinner click listener
         //spinner.setOnItemSelectedListener(this);
 
@@ -358,12 +375,18 @@ public class applicationform extends AppCompatActivity {
         cameraBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
 
-                ContentValues values=new ContentValues();
-                values.put(MediaStore.Images.Media.TITLE,"s");
-                imageUri=getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,values);
-                Intent c=new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                c.putExtra(MediaStore.EXTRA_OUTPUT,imageUri);
-                startActivityForResult(c,CAMERA_REQUEST_COSE);
+//                ContentValues values=new ContentValues();
+//                values.put(MediaStore.Images.Media.TITLE,"s");
+//                imageUri=getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,values);
+//                Intent c=new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//                c.putExtra(MediaStore.EXTRA_OUTPUT,imageUri);
+//                startActivityForResult(c,CAMERA_REQUEST_COSE);
+
+
+                Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+                    startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+                }
 
 //                ContentValues values=new ContentValues();
 //                values.put(MediaStore.Images.Media.TITLE,"s");
@@ -419,36 +442,10 @@ public class applicationform extends AppCompatActivity {
                     adarcard.setError("This field cannot be blank");
                 }
                 else if(imageUrl=="not available"||test!="upload"){
-                    Toast.makeText(applicationform.this, "Wait for the image to upload/Upload image", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(applicationform.this, "Image not uploaded or Wait for the image to upload", Toast.LENGTH_SHORT).show();
                 }
                 else {
 
-                    //uploadImage();
-//                    if(filePath != null) {
-//                        pd.show();
-//
-//                        StorageReference childRef = storageRef.child("image.jpg");
-//
-//                        //uploading the image
-//                        UploadTask uploadTask = childRef.putFile(filePath);
-//
-//                        uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-//                            @Override
-//                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-//                                pd.dismiss();
-//                                Toast.makeText(applicationform.this, "Upload successful", Toast.LENGTH_SHORT).show();
-//                            }
-//                        }).addOnFailureListener(new OnFailureListener() {
-//                            @Override
-//                            public void onFailure(@NonNull Exception e) {
-//                                pd.dismiss();
-//                                Toast.makeText(applicationform.this, "Upload Failed -> " + e, Toast.LENGTH_SHORT).show();
-//                            }
-//                        });
-//                    }
-//                    else {
-//                        Toast.makeText(applicationform.this, "Select an image", Toast.LENGTH_SHORT).show();
-//                    }
 
                     hofstring = hof.getText().toString();
                     fathername = f_name.getText().toString();
@@ -465,25 +462,7 @@ public class applicationform extends AppCompatActivity {
                     startActivity(a);
                     applicationform.this.finish();
 
-//                if(numberofmembers.equals("0")==false) {
-//                               String id2= addcategory();
-//                                Intent a = new Intent(applicationform.this, familymembers.class);
-//                                a.putExtra("membercount", numberofmembers.trim());
-//                                a.putExtra("id", id2);
-//                                a.putExtra("memberno", "1");
-//                                startActivity(a);
-//                                applicationform.this.finish();
-//                            }
-//                            else{
-//                                String id2= addcategory();
-//                                Intent a = new Intent(applicationform.this, houseform.class);
-//                                a.putExtra("id", id2);
-//                                startActivity(a);
-//                                applicationform.this.finish();
-//                            }
-
-
-//                        }
+//
 
                 }
             }
@@ -493,46 +472,40 @@ public class applicationform extends AppCompatActivity {
 
     }
 
-//    private File createPhotoFile() {
-//        String name = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-//        File storageDir = getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
-//        File image = null;
-//        try {
-//            image = File.createTempFile(name, ".jpg", storageDir);
-//        } catch (IOException e) {
-//
-//        }
-//        return image;
-//    }
-
-    //FirebaseStorage fetchstorage = FirebaseStorage.getInstance();
-
-//
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode==CAMERA_REQUEST_COSE&& resultCode==RESULT_OK )
-        {
+        if(requestCode==CAMERA_REQUEST_COSE&& resultCode==RESULT_OK ) {
 
             mprogress.setMessage("uploading image");
-//            @SuppressWarnings("VisibleForTests") Uri uri=data.getData();
-            StorageReference filepath=mStorage.child("photos").child(imageUri.getLastPathSegment().toString());
-            //Toast.makeText(this, imageUri.toString(), Toast.LENGTH_SHORT).show();
+
+            Bundle extras = data.getExtras();
+            final Bitmap imageBitmap = (Bitmap) extras.get("data");
+            Toast.makeText(this, imageBitmap.toString(), Toast.LENGTH_SHORT).show();
+            ByteArrayOutputStream byteArrayOutputStream=new ByteArrayOutputStream();
+            imageBitmap.compress(Bitmap.CompressFormat.JPEG,100,byteArrayOutputStream);
+
+
+            final byte[]  thumb_byte=byteArrayOutputStream.toByteArray();
+
+            long  time1 = (long) (System.currentTimeMillis());
+
+            String ts =  String.valueOf(time1);
+            Toast.makeText(this, ts, Toast.LENGTH_SHORT).show();
+            StorageReference filepath = mStorage.child("photos").child(firebaseAuth.getUid()+ts);
             imageUrl = filepath.toString();
-            filepath.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            // Toast.makeText(this, imageUrl, Toast.LENGTH_SHORT).show();
+            filepath.putBytes(thumb_byte).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    Toast.makeText(applicationform.this, "succesful", Toast.LENGTH_SHORT).show();
                     test="upload";
-                    mprogress.dismiss();
                     imageBox.setVisibility(View.VISIBLE);
-                    imageBox.setImageURI(imageUri);
-
-
-
+                    imageBox.setImageBitmap(imageBitmap);
                 }
             });
+
 
         }
     }
@@ -548,11 +521,7 @@ public class applicationform extends AppCompatActivity {
 
     public String  addcategory()
     {
-        //int agee=21;
-        //long phone=89685778;
 
-        //   menber.setAge(agee);
-//      menber.setPh(phone);
 
         Long tt= Long.valueOf(1000000000);
         Long tsLong = System.currentTimeMillis()/1000;
@@ -577,13 +546,8 @@ public class applicationform extends AppCompatActivity {
         String currentDateandTime=day+"-"+month+"-"+year+"  "+ hours+":"+min;
 
         apff = new appformfirebase(slumname, hofstring, genderstring, category, religion, fathername, hofage, mobilenumber, addressstring, familyincome, nationality, aadhar, numberofmembers, imageUrl);
-
-//        db.child(id).child("headoffamily").setValue(apff);
-//        db.child(id).child("agentname").setValue(firebaseAuth.getCurrentUser().getEmail().toString());
-//        Toast.makeText(applicationform.this," Head of family added succesfully ",Toast.LENGTH_SHORT).show();
-
-
         return id;
     }
+
 
 }
