@@ -1,8 +1,12 @@
 package com.example.slumsurvey;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -52,6 +56,7 @@ public class familymembers extends AppCompatActivity {
         Intent iin= getIntent();
         Bundle b = iin.getExtras();
 
+
         if(b!=null)
         {
             id=(String) b.get("id");
@@ -70,7 +75,7 @@ public class familymembers extends AppCompatActivity {
 //            b1.setVisibility(View.GONE);
 //            b2.setVisibility(View.VISIBLE);
 //        }
-       // Toast.makeText(this, j+"  " + s, Toast.LENGTH_SHORT).show();
+        // Toast.makeText(this, j+"  " + s, Toast.LENGTH_SHORT).show();
         List<String> gen = new ArrayList<String>();
         gen.add("Male");
         gen.add("Female");
@@ -116,11 +121,16 @@ public class familymembers extends AppCompatActivity {
                     n5.setError("This field cannot be blank");
                 }
                 else {
-                    addcategory();
-                    Intent a = new Intent(familymembers.this, familymembers.class);
-                    a.putExtra("id", id);
-                    startActivity(a);
-                    familymembers.this.finish();
+                    if(checknetwork()==true) {
+
+
+                        addcategory();
+                        Intent a = new Intent(familymembers.this, familymembers.class);
+                        a.putExtra("id", id);
+                        startActivity(a);
+                        familymembers.this.finish();
+
+                    }
                 }
 
             }
@@ -148,10 +158,17 @@ public class familymembers extends AppCompatActivity {
                     n5.setError("This field cannot be blank");
                 }
                 else{
-                    addcategory();
-                    Intent a = new Intent(familymembers.this,dashb.class);
-                    startActivity(a);
-                    familymembers.this.finish();
+
+
+                    if(checknetwork()==true)
+                    {
+                        addcategory();
+                        Intent a = new Intent(familymembers.this,dashb.class);
+                        startActivity(a);
+                        familymembers.this.finish();
+                    }
+
+
                 }
 
 
@@ -171,12 +188,46 @@ public class familymembers extends AppCompatActivity {
         });
     }
 
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(familymembers.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
     public void onBackPressed() {
         super.onBackPressed();
 
         Intent a = new Intent(familymembers.this,dashb.class);
         startActivity(a);
         familymembers.this.finish();
+
+    }
+    boolean checknetwork()
+    {
+        if(isNetworkAvailable()==true)
+        {
+            return  true;
+
+        }
+        else
+        {
+
+            AlertDialog.Builder mybuilder=new AlertDialog.Builder(this);
+            mybuilder.setMessage("No Internet connection. Please check your internet connection ?");
+            mybuilder.setPositiveButton("Retry", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+                    checknetwork();
+
+                }
+            });
+
+
+            AlertDialog mydialog=mybuilder.create();
+            mydialog.show();
+            return  false;
+        }
 
     }
     public String  addcategory()
@@ -210,15 +261,15 @@ public class familymembers extends AppCompatActivity {
         String min = sdf5.format(new Date());
         String currentDateandTime=day+"-"+month+"-"+year+"  "+ hours+":"+min;
 
-            membername = n1.getText().toString().trim();
-            genderstring = gender1;
-            age1 = n3.getText().toString().trim();
-            relation = n4.getText().toString().trim();
-            aadhar = n5.getText().toString().trim();
+        membername = n1.getText().toString().trim();
+        genderstring = gender1;
+        age1 = n3.getText().toString().trim();
+        relation = n4.getText().toString().trim();
+        aadhar = n5.getText().toString().trim();
 
-            membersformcl memf = new membersformcl(membername, genderstring, age1, relation, aadhar);
-            db.child(id).child("members").child(id2).setValue(memf);
-            Toast.makeText(familymembers.this, " Member of family added succesfully ", Toast.LENGTH_SHORT).show();
+        membersformcl memf = new membersformcl(membername, genderstring, age1, relation, aadhar);
+        db.child(id).child("members").child(id2).setValue(memf);
+        Toast.makeText(familymembers.this, " Member of family added succesfully ", Toast.LENGTH_SHORT).show();
 
 
         return id;

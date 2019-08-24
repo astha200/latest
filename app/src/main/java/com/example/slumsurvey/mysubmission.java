@@ -8,6 +8,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,15 +55,55 @@ public class mysubmission extends AppCompatActivity {
         mylist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, final int i, long l) {
-                Intent a = new Intent(mysubmission.this,Infoshow.class);
-                a.putExtra("id", id.get(i));
-                startActivity(a);
+
+                if(checknetwork()==true) {
+                    Intent a = new Intent(mysubmission.this, Infoshow.class);
+                    a.putExtra("id", id.get(i));
+                    startActivity(a);
+                }
 
 
             }
         });
 
     }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(familymembers.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
+    boolean checknetwork()
+    {
+        if(isNetworkAvailable()==true)
+        {
+            return  true;
+
+        }
+        else
+        {
+
+            AlertDialog.Builder mybuilder=new AlertDialog.Builder(this);
+            mybuilder.setMessage("No Internet connection. Please check your internet connection ?");
+            mybuilder.setPositiveButton("Retry", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+                    checknetwork();
+
+                }
+            });
+
+
+            AlertDialog mydialog=mybuilder.create();
+            mydialog.show();
+            return  false;
+        }
+
+    }
+
     public void onBackPressed() {
         super.onBackPressed();
 

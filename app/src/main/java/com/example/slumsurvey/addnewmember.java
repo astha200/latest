@@ -1,8 +1,12 @@
 package com.example.slumsurvey;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -104,11 +108,13 @@ public class addnewmember extends AppCompatActivity {
                     n52.setError("This field cannot be blank");
                 }
                 else{
-                    addcategory();
-                    Intent a = new Intent(addnewmember.this,Infoshow.class);
-                    a.putExtra("id", id);
-                    startActivity(a);
-                    addnewmember.this.finish();
+                    if(checknetwork()==true) {
+                        addcategory();
+                        Intent a = new Intent(addnewmember.this, Infoshow.class);
+                        a.putExtra("id", id);
+                        startActivity(a);
+                        addnewmember.this.finish();
+                    }
                 }
 
 
@@ -126,6 +132,42 @@ public class addnewmember extends AppCompatActivity {
                 addnewmember.this.finish();
             }
         });
+    }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(familymembers.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
+    boolean checknetwork()
+    {
+        if(isNetworkAvailable()==true)
+        {
+            return  true;
+
+        }
+        else
+        {
+
+            AlertDialog.Builder mybuilder=new AlertDialog.Builder(this);
+            mybuilder.setMessage("No Internet connection. Please check your internet connection ?");
+            mybuilder.setPositiveButton("Retry", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+                    checknetwork();
+
+                }
+            });
+
+
+            AlertDialog mydialog=mybuilder.create();
+            mydialog.show();
+            return  false;
+        }
+
     }
 
     public void onBackPressed() {

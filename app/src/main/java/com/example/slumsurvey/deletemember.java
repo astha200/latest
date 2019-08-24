@@ -8,6 +8,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -65,30 +67,27 @@ public class deletemember extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, final int i, long l) {
 
-
-
+                if(checknetwork()==true) {
                     final AlertDialog.Builder mybuilder=new AlertDialog.Builder(deletemember.this);
                     mybuilder.setMessage("Do You Want to delete this Member");
 
-                        mybuilder.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
+                    mybuilder.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
 
 
-                                db =FirebaseDatabase.getInstance().getReference().child("forms").child(d).child("members");
-                                db.child(mid.get(i)).removeValue();
-                                Toast.makeText(deletemember.this, "member deleted", Toast.LENGTH_SHORT).show();
-                                Intent a = new Intent(deletemember.this,Infoshow.class);
-                                a.putExtra("id", d);
-                                startActivity(a);
+                            db =FirebaseDatabase.getInstance().getReference().child("forms").child(d).child("members");
+                            db.child(mid.get(i)).removeValue();
+                            Toast.makeText(deletemember.this, "member deleted", Toast.LENGTH_SHORT).show();
+                            Intent a = new Intent(deletemember.this,Infoshow.class);
+                            a.putExtra("id", d);
+                            startActivity(a);
+                            AlertDialog mydialog=mybuilder.create();
+                            mydialog.show();
 
-                            }
-                        });
-
-
-
-                    AlertDialog mydialog=mybuilder.create();
-                    mydialog.show();
+                        }
+                    });
+                }
 
                 }
 
@@ -125,6 +124,43 @@ public class deletemember extends AppCompatActivity {
 
 
     }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(familymembers.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
+    boolean checknetwork()
+    {
+        if(isNetworkAvailable()==true)
+        {
+            return  true;
+
+        }
+        else
+        {
+
+            AlertDialog.Builder mybuilder=new AlertDialog.Builder(this);
+            mybuilder.setMessage("No Internet connection. Please check your internet connection ?");
+            mybuilder.setPositiveButton("Retry", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+                    checknetwork();
+
+                }
+            });
+
+
+            AlertDialog mydialog=mybuilder.create();
+            mydialog.show();
+            return  false;
+        }
+
+    }
+
     void fetchvalues() {
 
 
@@ -179,8 +215,8 @@ public class deletemember extends AppCompatActivity {
 
             }
 
-        });
 
+        });
 
 
 

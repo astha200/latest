@@ -2,12 +2,16 @@ package com.example.slumsurvey;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -227,48 +231,58 @@ public class Infoshow extends AppCompatActivity {
 
         if(item.getItemId()==R.id.edithead)
         {
-            Intent a1 = new Intent(Infoshow.this,edithead.class);
-            a1.putExtra("id", d);
-            startActivity(a1); //Error here
-            Infoshow.this.finish();
+
+            if(checknetwork()==true) {
+                Intent a1 = new Intent(Infoshow.this, edithead.class);
+                a1.putExtra("id", d);
+                startActivity(a1); //Error here
+                Infoshow.this.finish();
+            }
 
         }
         else if(item.getItemId()==R.id.deletehousemem)
         {
-            Intent a = new Intent(Infoshow.this,deletemember.class);
-            a.putExtra("id", d);
-            startActivity(a);
-
+            if(checknetwork()==true) {
+                Intent a = new Intent(Infoshow.this, deletemember.class);
+                a.putExtra("id", d);
+                startActivity(a);
+            }
 
 
         }
         else if(item.getItemId()==R.id.addhousemem)
         {
-            Intent a = new Intent(Infoshow.this,addnewmember.class);
-            a.putExtra("id", d);
-            startActivity(a);
-            Infoshow.this.finish();
+            if(checknetwork()==true) {
+                Intent a = new Intent(Infoshow.this, addnewmember.class);
+                a.putExtra("id", d);
+                startActivity(a);
+                Infoshow.this.finish();
+            }
 
         }
         else if(item.getItemId()==R.id.edithouseinfo)
         {
-            Intent a1 = new Intent(Infoshow.this,edithouseinfo.class);
-            a1.putExtra("id", d);
-            startActivity(a1); //Error here
-            Infoshow.this.finish();
+            if(checknetwork()==true) {
+                Intent a1 = new Intent(Infoshow.this, edithouseinfo.class);
+                a1.putExtra("id", d);
+                startActivity(a1); //Error here
+                Infoshow.this.finish();
+            }
 
         }
         else if(item.getItemId()==R.id.deleteentry)
 
         {
+            if(checknetwork()==true) {
 
-            firebaseAuth= FirebaseAuth.getInstance();
-            db= FirebaseDatabase.getInstance().getReference().child("deleterequest");
-            db.child(d).child("agentname").setValue(firebaseAuth.getCurrentUser().getEmail().toString());
-            Toast.makeText(this, "Your Delete Request Has been Send", Toast.LENGTH_SHORT).show();
-            Intent a = new Intent(Infoshow.this,mysubmission.class);
-            startActivity(a);
-            Infoshow.this.finish();
+                firebaseAuth = FirebaseAuth.getInstance();
+                db = FirebaseDatabase.getInstance().getReference().child("deleterequest");
+                db.child(d).child("agentname").setValue(firebaseAuth.getCurrentUser().getEmail().toString());
+                Toast.makeText(this, "Your Delete Request Has been Send", Toast.LENGTH_SHORT).show();
+                Intent a = new Intent(Infoshow.this, mysubmission.class);
+                startActivity(a);
+                Infoshow.this.finish();
+            }
 
         }
         return true;
@@ -280,6 +294,42 @@ public class Infoshow extends AppCompatActivity {
         Intent a = new Intent(Infoshow.this,mysubmission.class);
         startActivity(a);
         Infoshow.this.finish();
+
+    }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(familymembers.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
+    boolean checknetwork()
+    {
+        if(isNetworkAvailable()==true)
+        {
+            return  true;
+
+        }
+        else
+        {
+
+            AlertDialog.Builder mybuilder=new AlertDialog.Builder(this);
+            mybuilder.setMessage("No Internet connection. Please check your internet connection ?");
+            mybuilder.setPositiveButton("Retry", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+                    checknetwork();
+
+                }
+            });
+
+
+            AlertDialog mydialog=mybuilder.create();
+            mydialog.show();
+            return  false;
+        }
 
     }
 

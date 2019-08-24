@@ -2,14 +2,18 @@ package com.example.slumsurvey;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -349,25 +353,15 @@ public class edithead extends AppCompatActivity {
 
         cameraBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
+                if(checknetwork()==true) {
 
-                Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-                    startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+                    Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+                        startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+                    }
                 }
             }
         });
-//        cameraBtn1.setOnClickListener(new View.OnClickListener() {
-//
-//            @Override
-//
-//            public void onClick(View view) {
-//                imgtype="house";
-//                imageBox1.setVisibility(View.VISIBLE);
-//                Intent cameraIntent2 = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-//                startActivityForResult(cameraIntent2, 0);
-//
-//            }
-//        });
 
         db.child(d).addValueEventListener(new ValueEventListener() {
             @Override
@@ -464,34 +458,6 @@ public class edithead extends AppCompatActivity {
                     Toast.makeText(edithead.this, "Wait for the image to upload/Upload image", Toast.LENGTH_SHORT).show();
                 }
                 else {
-
-                    //uploadImage();
-//                    if(filePath != null) {
-//                        pd.show();
-//
-//                        StorageReference childRef = storageRef.child("image.jpg");
-//
-//                        //uploading the image
-//                        UploadTask uploadTask = childRef.putFile(filePath);
-//
-//                        uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-//                            @Override
-//                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-//                                pd.dismiss();
-//                                Toast.makeText(applicationform.this, "Upload successful", Toast.LENGTH_SHORT).show();
-//                            }
-//                        }).addOnFailureListener(new OnFailureListener() {
-//                            @Override
-//                            public void onFailure(@NonNull Exception e) {
-//                                pd.dismiss();
-//                                Toast.makeText(applicationform.this, "Upload Failed -> " + e, Toast.LENGTH_SHORT).show();
-//                            }
-//                        });
-//                    }
-//                    else {
-//                        Toast.makeText(applicationform.this, "Select an image", Toast.LENGTH_SHORT).show();
-//                    }
-
                     hofstring = hof.getText().toString();
                     fathername = f_name.getText().toString();//problem
                     hofage = hof_age.getText().toString();
@@ -505,27 +471,6 @@ public class edithead extends AppCompatActivity {
                     a.putExtra("id", id2);
                     startActivity(a);
                     edithead.this.finish();
-
-//                if(numberofmembers.equals("0")==false) {
-//                               String id2= addcategory();
-//                                Intent a = new Intent(applicationform.this, familymembers.class);
-//                                a.putExtra("membercount", numberofmembers.trim());
-//                                a.putExtra("id", id2);
-//                                a.putExtra("memberno", "1");
-//                                startActivity(a);
-//                                applicationform.this.finish();
-//                            }
-//                            else{
-//                                String id2= addcategory();
-//                                Intent a = new Intent(applicationform.this, houseform.class);
-//                                a.putExtra("id", id2);
-//                                startActivity(a);
-//                                applicationform.this.finish();
-//                            }
-
-
-//                        }
-
                 }
             }
 
@@ -534,21 +479,42 @@ public class edithead extends AppCompatActivity {
 
     }
 
-//    private File createPhotoFile() {
-//        String name = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-//        File storageDir = getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
-//        File image = null;
-//        try {
-//            image = File.createTempFile(name, ".jpg", storageDir);
-//        } catch (IOException e) {
-//
-//        }
-//        return image;
-//    }
 
-    //FirebaseStorage fetchstorage = FirebaseStorage.getInstance();
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(familymembers.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
 
-//
+    boolean checknetwork()
+    {
+        if(isNetworkAvailable()==true)
+        {
+            return  true;
+
+        }
+        else
+        {
+
+            AlertDialog.Builder mybuilder=new AlertDialog.Builder(this);
+            mybuilder.setMessage("No Internet connection. Please check your internet connection ?");
+            mybuilder.setPositiveButton("Retry", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+                    checknetwork();
+
+                }
+            });
+
+
+            AlertDialog mydialog=mybuilder.create();
+            mydialog.show();
+            return  false;
+        }
+
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {

@@ -5,6 +5,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -19,12 +20,15 @@ import com.google.firebase.storage.UploadTask;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.hardware.camera2.CameraManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -374,38 +378,13 @@ public class applicationform extends AppCompatActivity {
 
         cameraBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-
-//                ContentValues values=new ContentValues();
-//                values.put(MediaStore.Images.Media.TITLE,"s");
-//                imageUri=getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,values);
-//                Intent c=new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//                c.putExtra(MediaStore.EXTRA_OUTPUT,imageUri);
-//                startActivityForResult(c,CAMERA_REQUEST_COSE);
-
-
-                Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-                    startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+                if(checknetwork()==true) {
+                    Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+                        startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+                    }
                 }
 
-//                ContentValues values=new ContentValues();
-//                values.put(MediaStore.Images.Media.TITLE,"s");
-//                imageUri=getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,values);
-//
-//                Intent c=new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//                File photoFile = null;
-//                photoFile = createPhotoFile();
-//                if(photoFile!=null) {
-//                    pathToFile = photoFile.getAbsolutePath();
-//                    Uri photoURI = FileProvider.getUriForFile(applicationform.this, "com.example.slumsurvey.fileprovider", photoFile);
-//                    c.putExtra(MediaStore.EXTRA_OUTPUT,photoURI);
-//                    startActivityForResult(c,CAMERA_REQUEST_COSE);
-//                    //startActivityForResult(c,CAMERA_REQUEST_COSE);
-//
-//                }
-//
-//                c.putExtra(MediaStore.EXTRA_OUTPUT,imageUri);
-                //startActivityForResult(c,CAMERA_REQUEST_COSE);
             }
         });
 //        cameraBtn1.setOnClickListener(new View.OnClickListener() {
@@ -446,21 +425,24 @@ public class applicationform extends AppCompatActivity {
                 }
                 else {
 
+                    if(checknetwork()==true) {
 
-                    hofstring = hof.getText().toString();
-                    fathername = f_name.getText().toString();
-                    hofage = hof_age.getText().toString();
-                    mobilenumber = mob_number.getText().toString();
-                    addressstring = address.getText().toString();
-                    familyincome = family.getText().toString();
-                    aadhar = adarcard.getText().toString();
 
-                    String id2= addcategory();
-                    Intent a = new Intent(applicationform.this, houseform.class);
-                    a.putExtra("id", id2);
-                    a.putExtra("sampleObject", apff);
-                    startActivity(a);
-                    applicationform.this.finish();
+                        hofstring = hof.getText().toString();
+                        fathername = f_name.getText().toString();
+                        hofage = hof_age.getText().toString();
+                        mobilenumber = mob_number.getText().toString();
+                        addressstring = address.getText().toString();
+                        familyincome = family.getText().toString();
+                        aadhar = adarcard.getText().toString();
+
+                        String id2 = addcategory();
+                        Intent a = new Intent(applicationform.this, houseform.class);
+                        a.putExtra("id", id2);
+                        a.putExtra("sampleObject", apff);
+                        startActivity(a);
+                        applicationform.this.finish();
+                    }
 
 //
 
@@ -508,6 +490,42 @@ public class applicationform extends AppCompatActivity {
 
 
         }
+    }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(familymembers.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
+    boolean checknetwork()
+    {
+        if(isNetworkAvailable()==true)
+        {
+            return  true;
+
+        }
+        else
+        {
+
+            AlertDialog.Builder mybuilder=new AlertDialog.Builder(this);
+            mybuilder.setMessage("No Internet connection. Please check your internet connection ?");
+            mybuilder.setPositiveButton("Retry", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+                    checknetwork();
+
+                }
+            });
+
+
+            AlertDialog mydialog=mybuilder.create();
+            mydialog.show();
+            return  false;
+        }
+
     }
 
     public void onBackPressed() {

@@ -3,14 +3,18 @@
 
         import androidx.annotation.NonNull;
         import androidx.annotation.Nullable;
+        import androidx.appcompat.app.AlertDialog;
         import androidx.appcompat.app.AppCompatActivity;
         import androidx.core.content.FileProvider;
 
         import android.app.ProgressDialog;
         import android.content.ContentValues;
+        import android.content.DialogInterface;
         import android.content.Intent;
         import android.graphics.Bitmap;
         import android.graphics.BitmapFactory;
+        import android.net.ConnectivityManager;
+        import android.net.NetworkInfo;
         import android.net.Uri;
         import android.os.Bundle;
         import android.provider.MediaStore;
@@ -216,9 +220,11 @@
         @Override
         public void onClick(View view) {
 
-                Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-                        startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+                if(checknetwork()==true) {
+                        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+                                startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+                        }
                 }
 
         }
@@ -252,43 +258,13 @@
                 Toast.makeText(houseform.this, "Wait for the image to upload/Upload image", Toast.LENGTH_SHORT).show();
         }
         else{
-//                    // uploadImage();
-//                    if(filePath != null) {
-//                        pd.show();
-//
-//                        StorageReference childRef = storageRef.child("image.jpg");
-//
-//                        //uploading the image
-//                        UploadTask uploadTask = childRef.putFile(filePath);
-//
-//                        uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-//                            @Override
-//                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-//                                pd.dismiss();
-//                                Toast.makeText(houseform.this, "Upload successful", Toast.LENGTH_SHORT).show();
-//                            }
-//                        }).addOnFailureListener(new OnFailureListener() {
-//                            @Override
-//                            public void onFailure(@NonNull Exception e) {
-//                                pd.dismiss();
-//                                Toast.makeText(houseform.this, "Upload Failed -> " + e, Toast.LENGTH_SHORT).show();
-//                            }
-//                        });
-//                    }
-//                    else {
-//                        Toast.makeText(houseform.this, "Select an image", Toast.LENGTH_SHORT).show();
-//                    }
-
-        String id2= addcategory();
-
-//                Intent a = new Intent(houseform.this,dashb.class);
-//////                startActivity(a);
-//////                houseform.this.finish();
-
-        Intent a = new Intent(houseform.this, familymembers.class);
-        a.putExtra("id", id2);
-        startActivity(a);
-        houseform.this.finish();
+                if(checknetwork()==true) {
+                        String id2= addcategory();
+                        Intent a = new Intent(houseform.this, familymembers.class);
+                        a.putExtra("id", id2);
+                        startActivity(a);
+                        houseform.this.finish();
+                }
 
         }
 
@@ -382,7 +358,41 @@
                 }
         }
 
+                private boolean isNetworkAvailable() {
+                        ConnectivityManager connectivityManager
+                                = (ConnectivityManager) getSystemService(familymembers.CONNECTIVITY_SERVICE);
+                        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+                        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+                }
 
+                boolean checknetwork()
+                {
+                        if(isNetworkAvailable()==true)
+                        {
+                                return  true;
+
+                        }
+                        else
+                        {
+
+                                AlertDialog.Builder mybuilder=new AlertDialog.Builder(this);
+                                mybuilder.setMessage("No Internet connection. Please check your internet connection ?");
+                                mybuilder.setPositiveButton("Retry", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+
+                                                checknetwork();
+
+                                        }
+                                });
+
+
+                                AlertDialog mydialog=mybuilder.create();
+                                mydialog.show();
+                                return  false;
+                        }
+
+                }
 
         public void onBackPressed() {
         super.onBackPressed();
