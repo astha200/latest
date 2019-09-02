@@ -474,7 +474,7 @@ public class applicationform extends AppCompatActivity {
             long  time1 = (long) (System.currentTimeMillis());
 
             String ts =  String.valueOf(time1);
-            Toast.makeText(this, ts, Toast.LENGTH_SHORT).show();
+           // Toast.makeText(this, ts, Toast.LENGTH_SHORT).show();
             StorageReference filepath = mStorage.child("photos").child(firebaseAuth.getUid()+ts);
             imageUrl = filepath.toString();
             // Toast.makeText(this, imageUrl, Toast.LENGTH_SHORT).show();

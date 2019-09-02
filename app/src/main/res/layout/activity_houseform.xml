@@ -324,7 +324,7 @@
                         android:textColor="@color/colorPrimaryDark"
                         android:textSize="18sp" />
 
-                    <EditText
+                    <Spinner
                         android:id="@+id/consented"
                         android:layout_width="match_parent"
                         android:layout_height="55dp"

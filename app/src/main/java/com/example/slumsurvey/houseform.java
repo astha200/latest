@@ -70,11 +70,11 @@
 
 
         public class houseform extends AppCompatActivity {
-        Spinner conhouse,room,toilet,kitchen, yosspinner;
+        Spinner conhouse,room,toilet,kitchen, yosspinner, consent;
         ImageView cameraBtn12, imageBox12;
         Bitmap bitmap1;
         Button exit;
-        EditText area,areabuilt,consent;
+        EditText area,areabuilt;
         static final int REQUEST_IMAGE_CAPTURE = 1;
         DatabaseReference db;
         FirebaseAuth firebaseAuth;
@@ -86,7 +86,7 @@
         private StorageReference mStorage;
         private ProgressDialog mprogress;
 
-        String  conhousestring, roomstring, toiletstring, kitchenstring, yearsofstayingstring, imageUrl="not available";
+        String  conhousestring, roomstring, toiletstring, kitchenstring, yearsofstayingstring, imageUrl="not available", consentstring;
 
         FirebaseStorage storage;
 
@@ -108,7 +108,6 @@
 
         area=findViewById(R.id.areaed);
         areabuilt=findViewById(R.id.areabuilted);
-        consent=findViewById(R.id.consented);
 
         firebaseAuth=FirebaseAuth.getInstance();
         db= FirebaseDatabase.getInstance().getReference().child("forms");
@@ -124,6 +123,7 @@
         toilet=findViewById(R.id.toileted);
         kitchen=findViewById(R.id.kitchened);
         yosspinner=findViewById(R.id.yosspinnered);
+        consent=findViewById(R.id.consented);
 
         storage = FirebaseStorage.getInstance();
         //final StorageReference storageRef = storage.getReferenceFromUrl("gs://survey-7f227.appspot.com/");
@@ -150,11 +150,16 @@
         yos.add("Less than or equal to 5");
         yos.add("Greater than 5");
 
+        List<String> cnsnt = new ArrayList<String>();
+        cnsnt.add("Yes");
+        cnsnt.add("No");
+
         conhouse.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,option));
         room.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,r_options));
         toilet.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,options));
         kitchen.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,options));
         yosspinner.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,yos));
+        consent.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,cnsnt));
 
         conhouse.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
         @Override
@@ -178,6 +183,18 @@
         public void onNothingSelected(AdapterView<?> adapterView) {
 
         }
+        });
+
+        room.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                        consentstring = consent.getItemAtPosition(i).toString();
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> adapterView) {
+
+                }
         });
 
         toilet.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -249,10 +266,6 @@
         else if(areabuilt.getText().toString().trim().equals(""))
         {
         areabuilt.setError("This field cannot be blank");
-        }
-        else if(consent.getText().toString().trim().equals(""))
-        {
-        consent.setError("This field cannot be blank");
         }
         else if(imageUrl=="not available"||test!="upload"){
                 Toast.makeText(houseform.this, "Wait for the image to upload/Upload image", Toast.LENGTH_SHORT).show();
@@ -330,7 +343,7 @@
 
                         Bundle extras = data.getExtras();
                         final Bitmap imageBitmap = (Bitmap) extras.get("data");
-                        Toast.makeText(this, imageBitmap.toString(), Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(this, imageBitmap.toString(), Toast.LENGTH_SHORT).show();
                         ByteArrayOutputStream byteArrayOutputStream=new ByteArrayOutputStream();
                         imageBitmap.compress(Bitmap.CompressFormat.JPEG,100,byteArrayOutputStream);
 
@@ -340,7 +353,7 @@
                         long  time1 = (long) (System.currentTimeMillis());
 
                         String ts =  String.valueOf(time1);
-                        Toast.makeText(this, ts, Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(this, ts, Toast.LENGTH_SHORT).show();
                         StorageReference filepath = mStorage.child("photos").child(firebaseAuth.getUid()+ts);
                         imageUrl = filepath.toString();
                         // Toast.makeText(this, imageUrl, Toast.LENGTH_SHORT).show();
@@ -376,15 +389,18 @@
                         {
 
                                 AlertDialog.Builder mybuilder=new AlertDialog.Builder(this);
-                                mybuilder.setMessage("No Internet connection. Please check your internet connection ?");
+                                mybuilder.setMessage("No Internet connection. Please check your internet connection? .Data is Not Saved please fill details again");
                                 mybuilder.setPositiveButton("Retry", new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {
 
-                                                checknetwork();
+                                                Intent a = new Intent(houseform.this,dashb.class);
+                                                startActivity(a);
+                                                houseform.this.finish();
 
                                         }
                                 });
+
 
 
                                 AlertDialog mydialog=mybuilder.create();
@@ -427,7 +443,7 @@
         String min = sdf5.format(new Date());
         String currentDateandTime=day+"-"+month+"-"+year+"  "+ hours+":"+min;
 
-        houseformfirebase hff = new houseformfirebase(area.getText().toString().trim(), areabuilt.getText().toString().trim(), conhousestring, roomstring, toiletstring, kitchenstring, yearsofstayingstring, consent.getText().toString().trim(), imageUrl);
+        houseformfirebase hff = new houseformfirebase(area.getText().toString().trim(), areabuilt.getText().toString().trim(), conhousestring, roomstring, toiletstring, kitchenstring, yearsofstayingstring, consentstring, imageUrl);
         db.child(id).child("houseoffamily").setValue(hff);
         Intent i = getIntent();
         appformfirebase dene = (appformfirebase)i.getSerializableExtra("sampleObject");

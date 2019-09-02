@@ -59,9 +59,9 @@ public class edithouseinfo extends AppCompatActivity {
     FirebaseStorage storage = FirebaseStorage.getInstance();
     StorageReference gsReference;
     private int STORAGE_PERMISSION_CODE=1;
-    Spinner conhouse, room, toilet, kitchen, yearsofstaying;
+    Spinner conhouse, room, toilet, kitchen, yearsofstaying, consent;
     ImageView imageBox1, cameraBtn12;
-    EditText area, areabuilt, consent;
+    EditText area, areabuilt;
     houseformfirebase apff1;
     Bitmap bitmap,bitmap1;
     String imgtype="Ss";
@@ -162,7 +162,9 @@ public class edithouseinfo extends AppCompatActivity {
         yos.add("Less than or equal to 5");
         yos.add("Greater than 5");
 
-        // Creating adapter for spinner
+        final List<String> cnsnt = new ArrayList<String>();
+        yos.add("Yes");
+        yos.add("No");
 
         conhouse.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,option));
         room.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,r_options));
@@ -222,6 +224,18 @@ public class edithouseinfo extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 yearsofstayingstring = yearsofstaying.getItemAtPosition(i).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        consent.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                consentstring = consent.getItemAtPosition(i).toString();
             }
 
             @Override
@@ -300,7 +314,7 @@ public class edithouseinfo extends AppCompatActivity {
                 toilet.setSelection(options.indexOf(dataSnapshot.child("houseoffamily").child("toilet").getValue().toString()));
                 kitchen.setSelection(options.indexOf(dataSnapshot.child("houseoffamily").child("kitchen").getValue().toString()));
                 areabuilt.setText(dataSnapshot.child("houseoffamily").child("areabuilt").getValue().toString());
-                consent.setText(dataSnapshot.child("houseoffamily").child("consent").getValue().toString());
+                consent.setSelection(cnsnt.indexOf(dataSnapshot.child("houseoffamily").child("consent").getValue().toString()));
                 yearsofstaying.setSelection(yos.indexOf(dataSnapshot.child("houseoffamily").child("yearsofstaying").getValue().toString()));
             }
 
@@ -324,10 +338,6 @@ public class edithouseinfo extends AppCompatActivity {
                 {
                     areabuilt.setError("This field cannot be blank");
                 }
-                else if(consent.getText().toString().trim().equals(""))
-                {
-                    consent.setError("This field cannot be blank");
-                }
                 else if(imageUrl=="not available"){
                     Toast.makeText(edithouseinfo.this, "Wait for the image to upload/Upload image", Toast.LENGTH_SHORT).show();
                 }
@@ -335,7 +345,6 @@ public class edithouseinfo extends AppCompatActivity {
                     if(checknetwork()==true) {
                         areastring = area.getText().toString();
                         areabuiltstring = areabuilt.getText().toString();//problem
-                        consentstring = consent.getText().toString();
 
                         String id2 = addcategory();
                         Intent a = new Intent(edithouseinfo.this, Infoshow.class);
