@@ -315,7 +315,7 @@
                     android:layout_marginRight="16dp"
                     android:orientation="vertical">
 
-                    <Spinner
+                    <TextView
                         android:id="@+id/adddesc8"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -324,7 +324,7 @@
                         android:textColor="@color/colorPrimaryDark"
                         android:textSize="18sp" />
 
-                    <EditText
+                    <Spinner
                         android:id="@+id/consent"
                         android:layout_width="match_parent"
                         android:layout_height="55dp"
