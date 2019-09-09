@@ -328,13 +328,7 @@
                         android:id="@+id/consent"
                         android:layout_width="match_parent"
                         android:layout_height="55dp"
-                        android:background="@drawable/bginputtask"
-                        android:hint=""
-                        android:inputType="text"
-                        android:maxLength="25"
-                        android:paddingLeft="12dp"
-                        android:textColor="@color/colorPrimaryDark"
-                        android:textColorHint="#B5B5B5" />
+                        android:background="@drawable/bginputtask" />
                 </LinearLayout>
                 <Button
                     android:id="@+id/saveexit"

@@ -23,6 +23,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
@@ -80,12 +81,11 @@ public class edithouseinfo extends AppCompatActivity {
     private ProgressDialog mprogress;
     //till here
 
-    private Uri filePath;
     ProgressDialog pd;
     private final int PICK_IMAGE_REQUEST = 71;
     private ImageView imageView;
 
-    String  conhousestring, roomstring, toiletstring, kitchenstring, yearsofstayingstring, imageUrl, areastring, areabuiltstring, consentstring;
+    String  conhousestring, roomstring, toiletstring, kitchenstring, yearsofstayingstring, imageUrl, areastring, areabuiltstring, consentstring, imagename;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,9 +104,9 @@ public class edithouseinfo extends AppCompatActivity {
         cameraBtn12=findViewById(R.id.cameraBtn12);
         imageBox1=findViewById(R.id.imageBox1);
         yearsofstaying=findViewById(R.id.yosspinner);
+        consent=findViewById(R.id.consent);
         area=findViewById(R.id.area);
         areabuilt=findViewById(R.id.areabuilt);
-        consent=findViewById(R.id.consent);
         firebaseAuth=FirebaseAuth.getInstance();
         mStorage= FirebaseStorage.getInstance().getReference();
         mprogress= new ProgressDialog(this);
@@ -163,14 +163,15 @@ public class edithouseinfo extends AppCompatActivity {
         yos.add("Greater than 5");
 
         final List<String> cnsnt = new ArrayList<String>();
-        yos.add("Yes");
-        yos.add("No");
+        cnsnt.add("Yes");
+        cnsnt.add("No");
 
         conhouse.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,option));
         room.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,r_options));
         toilet.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,options));
         kitchen.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,options));
         yearsofstaying.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,yos));
+        consent.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,cnsnt));
 
         conhouse.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -315,7 +316,10 @@ public class edithouseinfo extends AppCompatActivity {
                 kitchen.setSelection(options.indexOf(dataSnapshot.child("houseoffamily").child("kitchen").getValue().toString()));
                 areabuilt.setText(dataSnapshot.child("houseoffamily").child("areabuilt").getValue().toString());
                 consent.setSelection(cnsnt.indexOf(dataSnapshot.child("houseoffamily").child("consent").getValue().toString()));
+                //Log.e("consent", String.valueOf(cnsnt.indexOf(dataSnapshot.child("houseoffamily").child("consent").getValue().toString())));
+
                 yearsofstaying.setSelection(yos.indexOf(dataSnapshot.child("houseoffamily").child("yearsofstaying").getValue().toString()));
+
             }
 
             @Override
@@ -419,7 +423,8 @@ public class edithouseinfo extends AppCompatActivity {
 
             String ts =  String.valueOf(time1);
             Toast.makeText(this, ts, Toast.LENGTH_SHORT).show();
-            StorageReference filepath = mStorage.child("photos").child(firebaseAuth.getUid()+ts);
+            imagename=firebaseAuth.getUid()+ts;
+            StorageReference filepath = mStorage.child("photos").child(imagename);
             imageUrl = filepath.toString();
             // Toast.makeText(this, imageUrl, Toast.LENGTH_SHORT).show();
             filepath.putBytes(thumb_byte).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -440,7 +445,7 @@ public class edithouseinfo extends AppCompatActivity {
     {
 
 
-        apff1 = new houseformfirebase(areastring, areabuiltstring, conhousestring, roomstring, toiletstring, kitchenstring, yearsofstayingstring, consentstring, imageUrl);
+        apff1 = new houseformfirebase(areastring, areabuiltstring, conhousestring, roomstring, toiletstring, kitchenstring, yearsofstayingstring, consentstring, imageUrl, imagename);
 
 
         Toast.makeText(this, "d", Toast.LENGTH_SHORT).show();

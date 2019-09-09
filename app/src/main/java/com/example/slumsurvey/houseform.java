@@ -86,7 +86,7 @@
         private StorageReference mStorage;
         private ProgressDialog mprogress;
 
-        String  conhousestring, roomstring, toiletstring, kitchenstring, yearsofstayingstring, imageUrl="not available", consentstring;
+        String  conhousestring, roomstring, toiletstring, kitchenstring, yearsofstayingstring, imageUrl="not available", consentstring, imagename;
 
         FirebaseStorage storage;
 
@@ -185,17 +185,17 @@
         }
         });
 
-        room.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                        consentstring = consent.getItemAtPosition(i).toString();
-                }
-
-                @Override
-                public void onNothingSelected(AdapterView<?> adapterView) {
-
-                }
-        });
+//        room.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//                @Override
+//                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+//                        roomstring = room.getItemAtPosition(i).toString();
+//                }
+//
+//                @Override
+//                public void onNothingSelected(AdapterView<?> adapterView) {
+//
+//                }
+//        });
 
         toilet.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
         @Override
@@ -220,6 +220,18 @@
 
         }
         });
+
+                consent.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                                consentstring = consent.getItemAtPosition(i).toString();
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> adapterView) {
+
+                        }
+                });
 
         yosspinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
         @Override
@@ -354,7 +366,8 @@
 
                         String ts =  String.valueOf(time1);
 //                        Toast.makeText(this, ts, Toast.LENGTH_SHORT).show();
-                        StorageReference filepath = mStorage.child("photos").child(firebaseAuth.getUid()+ts);
+                        imagename=firebaseAuth.getUid()+ts;
+                        StorageReference filepath = mStorage.child("photos").child(imagename);
                         imageUrl = filepath.toString();
                         // Toast.makeText(this, imageUrl, Toast.LENGTH_SHORT).show();
                         filepath.putBytes(thumb_byte).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -443,7 +456,7 @@
         String min = sdf5.format(new Date());
         String currentDateandTime=day+"-"+month+"-"+year+"  "+ hours+":"+min;
 
-        houseformfirebase hff = new houseformfirebase(area.getText().toString().trim(), areabuilt.getText().toString().trim(), conhousestring, roomstring, toiletstring, kitchenstring, yearsofstayingstring, consentstring, imageUrl);
+        houseformfirebase hff = new houseformfirebase(area.getText().toString().trim(), areabuilt.getText().toString().trim(), conhousestring, roomstring, toiletstring, kitchenstring, yearsofstayingstring, consentstring, imageUrl, imagename);
         db.child(id).child("houseoffamily").setValue(hff);
         Intent i = getIntent();
         appformfirebase dene = (appformfirebase)i.getSerializableExtra("sampleObject");

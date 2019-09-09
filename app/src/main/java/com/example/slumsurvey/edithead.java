@@ -82,7 +82,7 @@ public class edithead extends AppCompatActivity {
     private final int PICK_IMAGE_REQUEST = 71;
     private ImageView imageView;
 
-    String slumname, genderstring, category, religion, nationality, numberofmembers, hofstring, fathername, hofage, mobilenumber, addressstring, familyincome, aadhar, imageUrl="not available";
+    String slumname, genderstring, category, religion, nationality, numberofmembers, hofstring, fathername, hofage, mobilenumber, addressstring, familyincome, aadhar, imageUrl="not available", imagename;
     String test="not upload";
 
     @Override
@@ -368,7 +368,8 @@ public class edithead extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 imageUrl=dataSnapshot.child("headoffamily").child("imageUrl").getValue().toString();
-                gsReference=storage.getReferenceFromUrl(imageUrl);
+                imagename=dataSnapshot.child("headoffamily").child("imagename").getValue().toString();
+                        gsReference=storage.getReferenceFromUrl(imageUrl);
 
                 try {
                     final File localFile = File.createTempFile("image", "jpg");
@@ -538,13 +539,14 @@ public class edithead extends AppCompatActivity {
 
             String ts =  String.valueOf(time1);
             Toast.makeText(this, ts, Toast.LENGTH_SHORT).show();
-            StorageReference filepath = mStorage.child("photos").child(firebaseAuth.getUid()+ts);
+            imagename=firebaseAuth.getUid()+ts;
+            StorageReference filepath = mStorage.child("photos").child(imagename);
             imageUrl = filepath.toString();
             // Toast.makeText(this, imageUrl, Toast.LENGTH_SHORT).show();
             filepath.putBytes(thumb_byte).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    Toast.makeText(edithead.this, "succesful", Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(edithead.this, "succesful", Toast.LENGTH_SHORT).show();
                     test="upload";
                     imageBox.setVisibility(View.VISIBLE);
                     imageBox.setImageBitmap(imageBitmap);
@@ -558,7 +560,7 @@ public class edithead extends AppCompatActivity {
     {
 
 
-        apff1 = new appformfirebase(slumname, hofstring, genderstring, category, religion, fathername, hofage, mobilenumber, addressstring, familyincome, nationality, aadhar, numberofmembers, imageUrl);
+        apff1 = new appformfirebase(slumname, hofstring, genderstring, category, religion, fathername, hofage, mobilenumber, addressstring, familyincome, nationality, aadhar, numberofmembers, imageUrl, imagename);
 
 
         Toast.makeText(this, "d", Toast.LENGTH_SHORT).show();

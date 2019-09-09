@@ -87,7 +87,6 @@ public class applicationform extends AppCompatActivity {
     String imgtype="Ss";
     Button save;
     static final int REQUEST_IMAGE_CAPTURE = 1;
-    String nameofslum,headof,gender;
     DatabaseReference db;
     FirebaseAuth firebaseAuth;
     String test="notuploaded";
@@ -95,7 +94,6 @@ public class applicationform extends AppCompatActivity {
     Bitmap thumb_bitmap;
 
     //FROM upload.java
-    Uri imageUri=null;
     private static final int CAMERA_REQUEST_COSE=1;
     private StorageReference mStorage;
     private ProgressDialog mprogress;
@@ -110,7 +108,7 @@ public class applicationform extends AppCompatActivity {
     private ImageView imageView;
 
 
-    String slumname, genderstring, category, religion, nationality, numberofmembers, hofstring, fathername, hofage, mobilenumber, addressstring, familyincome, aadhar, imageUrl="not available";
+    String slumname, genderstring, category, religion, nationality, numberofmembers, hofstring, fathername, hofage, mobilenumber, addressstring, familyincome, aadhar, imageUrl="not available", imagename;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -147,7 +145,7 @@ public class applicationform extends AppCompatActivity {
         db= FirebaseDatabase.getInstance().getReference().child("forms");
 
         FirebaseStorage storage = FirebaseStorage.getInstance();
-        final StorageReference storageRef = storage.getReferenceFromUrl("gs://survey-7f227.appspot.com/");    //change the url according to your firebase app
+        //final StorageReference storageRef = storage.getReferenceFromUrl("gs://survey-7f227.appspot.com/");    //change the url according to your firebase app
         // cameraBtn1=findViewById(R.id.cameraBtn1);
         //  imageBox1=findViewById(R.id.imageBox1);
         imageBox.setVisibility(View.GONE);
@@ -475,13 +473,17 @@ public class applicationform extends AppCompatActivity {
 
             String ts =  String.valueOf(time1);
            // Toast.makeText(this, ts, Toast.LENGTH_SHORT).show();
-            StorageReference filepath = mStorage.child("photos").child(firebaseAuth.getUid()+ts);
+
+            imagename=firebaseAuth.getUid()+ts;
+            StorageReference filepath = mStorage.child("photos").child(imagename);
+            String imgname=firebaseAuth.getUid()+ts;
             imageUrl = filepath.toString();
-            // Toast.makeText(this, imageUrl, Toast.LENGTH_SHORT).show();
+             Toast.makeText(this, imageUrl, Toast.LENGTH_SHORT).show();
             filepath.putBytes(thumb_byte).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     Toast.makeText(applicationform.this, "succesful", Toast.LENGTH_SHORT).show();
+                    //Log.i("jh",taskSnapshot.getStorage().getDownloadUrl().toString());
                     test="upload";
                     imageBox.setVisibility(View.VISIBLE);
                     imageBox.setImageBitmap(imageBitmap);
@@ -563,7 +565,7 @@ public class applicationform extends AppCompatActivity {
         String min = sdf5.format(new Date());
         String currentDateandTime=day+"-"+month+"-"+year+"  "+ hours+":"+min;
 
-        apff = new appformfirebase(slumname, hofstring, genderstring, category, religion, fathername, hofage, mobilenumber, addressstring, familyincome, nationality, aadhar, numberofmembers, imageUrl);
+        apff = new appformfirebase(slumname, hofstring, genderstring, category, religion, fathername, hofage, mobilenumber, addressstring, familyincome, nationality, aadhar, numberofmembers, imageUrl, imagename);
         return id;
     }
 

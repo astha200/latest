@@ -3,9 +3,9 @@ package com.example.slumsurvey;
 import java.io.Serializable;
 
 public class appformfirebase  implements Serializable {
-    private String nameofslum="info", headoffamily="info", gender="info", category="info", religion="info", fathername="info", hofage="info", mobilenumber="info", address="info", familyincome="info", nationality="info", aadhar="info", numberofmembers="info", imageUrl="info";
+    private String nameofslum="info", headoffamily="info", gender="info", category="info", religion="info", fathername="info", hofage="info", mobilenumber="info", address="info", familyincome="info", nationality="info", aadhar="info", numberofmembers="info", imageUrl="info", imagename;
 
-    public appformfirebase(String nameofslum, String headoffamily, String gender, String category, String religion, String fathername, String hofage, String mobilenumber, String address, String familyincome, String nationality, String aadhar, String numberofmembers, String imageUrl) {
+    public appformfirebase(String nameofslum, String headoffamily, String gender, String category, String religion, String fathername, String hofage, String mobilenumber, String address, String familyincome, String nationality, String aadhar, String numberofmembers, String imageUrl, String imagename) {
         this.nameofslum = nameofslum;
         this.headoffamily = headoffamily;
         this.gender = gender;
@@ -20,6 +20,7 @@ public class appformfirebase  implements Serializable {
         this.aadhar = aadhar;
         this.numberofmembers = numberofmembers;
         this.imageUrl = imageUrl;
+        this.imagename=imagename;
     }
 
     public String getNameofslum() {
@@ -76,6 +77,8 @@ public class appformfirebase  implements Serializable {
 
     public String getImageUrl() {return imageUrl; }
 
+    public String getImagename() {return imagename; }
+
     public void setNameofslum(String nameofslum) {
         this.nameofslum = nameofslum;
     }
@@ -125,6 +128,8 @@ public class appformfirebase  implements Serializable {
     }
 
     public void setImageUrl(String imageUrl) { this.imageUrl = imageUrl; }
+
+    public void setImagename(String imagename) { this.imagename = imagename; }
 
     public void setNumberofmembers(String numberofmembers) {
         this.numberofmembers = numberofmembers;

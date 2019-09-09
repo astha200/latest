@@ -2,9 +2,9 @@ package com.example.slumsurvey;
 
 public class houseformfirebase {
 
-    private String area, areabuilt, conhouse, room, toilet, kitchen, yearsofstaying, consent, imageUrl;
+    private String area, areabuilt, conhouse, room, toilet, kitchen, yearsofstaying, consent, imageUrl, imagename;
 
-    public houseformfirebase(String area, String areabuilt, String conhouse, String room, String toilet, String kitchen, String yearsofstaying, String consent, String imageUrl) {
+    public houseformfirebase(String area, String areabuilt, String conhouse, String room, String toilet, String kitchen, String yearsofstaying, String consent, String imageUrl, String imagename) {
         this.area = area;
         this.areabuilt = areabuilt;
         this.conhouse = conhouse;
@@ -14,6 +14,7 @@ public class houseformfirebase {
         this.yearsofstaying = yearsofstaying;
         this.consent = consent;
         this.imageUrl = imageUrl;
+        this.imagename=imagename;
     }
 
     public String getArea() {
@@ -50,6 +51,8 @@ public class houseformfirebase {
 
     public String getImageUrl() { return imageUrl; }
 
+    public String getImagename() { return imagename; }
+
     public void setArea(String area) {
         this.area = area;
     }
@@ -83,4 +86,6 @@ public class houseformfirebase {
     }
 
     public void setImageUrl(String imageUrl) { this.imageUrl = imageUrl; }
+
+    public void setImagename(String imagename) { this.imagename = imagename; }
 }
